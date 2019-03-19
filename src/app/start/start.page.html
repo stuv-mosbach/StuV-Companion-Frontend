@@ -9,10 +9,12 @@
   <ion-list>
     <ion-item>
       <ion-label>Kurs</ion-label>
-      <ion-select placeholder="Select One">
+      <ion-select placeholder="Select One" [(ngModel)]="selectedCourse">
         <ion-select-option *ngFor="let course of courses">{{course}}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
+
+<ion-button expand="block" fill="solid" (click)="submit()">Submit</ion-button>
 
 </ion-content>

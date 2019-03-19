@@ -9,6 +9,7 @@ import { StartService } from './start-service.service'
 })
 export class StartPage implements OnInit {
   courses: any[];
+  selectedCourse: string;
 
   constructor(private startService: StartService, private toastController: ToastController) {
     this.startService.getAllCourses().subscribe((list: string[]) => {
@@ -20,9 +21,13 @@ export class StartPage implements OnInit {
 
   }
 
+  submit() {
+    this.presentToast();
+  }
+
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Your settings have been saved.',
+      message: this.selectedCourse,
       duration: 2000
     });
     toast.present();
