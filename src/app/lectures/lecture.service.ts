@@ -11,4 +11,8 @@ export class LectureService {
   getLectures(courseId: string) {
     return this.http.get('http://dev.stuv-mosbach.de:8080/api/lectures/' + courseId.toUpperCase());
   }
+
+  getFutureLectures(courseId: string) {
+    return this.http.get('http://dev.stuv-mosbach.de:8080/api/futureLectures/' + courseId.toUpperCase());
+  }
 }

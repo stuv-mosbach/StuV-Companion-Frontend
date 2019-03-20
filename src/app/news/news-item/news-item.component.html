@@ -1,0 +1,9 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>{{news.created | date :'EE. dd.MM.yy'}}</ion-card-subtitle>
+    <ion-card-title>{{news.title}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content [innerHTML]=news.description>
+
+  </ion-card-content>
+</ion-card>

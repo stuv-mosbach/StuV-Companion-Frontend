@@ -17,7 +17,7 @@ export class LecturesPage implements OnInit {
 
   ngOnInit() {
     this.storage.get('course').then((data) => {
-      this.lectureService.getLectures(data).subscribe((lectures: Lecture[]) => {
+      this.lectureService.getFutureLectures(data).subscribe((lectures: Lecture[]) => {
         this.lectures = lectures;
         this.lectures.sort((a, b) => {
           return new Date(a.start).getTime() - new Date(b.start).getTime();
