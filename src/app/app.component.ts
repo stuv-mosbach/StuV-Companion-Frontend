@@ -24,7 +24,7 @@ export class AppComponent {
 
   initializeApp() {
     this.storage.get('active').then((data) => {
-      if(data == null) {
+      if(data == null || data == "no") {
         this.router.navigate(['start']);
       } else {
         this.router.navigate(['tabs/home']);

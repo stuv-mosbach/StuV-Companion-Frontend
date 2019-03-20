@@ -27,6 +27,10 @@ export class LecturesPage implements OnInit {
     });
   }
 
+  ionViewDidEnter() {
+    //todo: need to move the loading here but html needs to be cleared fist to get course changes detected
+  }
+
   initLectureMap() {
     this.lectures.forEach((lecture) => {
       const date: Date = this.getDateWithoutTime(lecture.start);
