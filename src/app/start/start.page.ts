@@ -16,6 +16,7 @@ export class StartPage implements OnInit {
   constructor(private startService: StartService, private toastController: ToastController, private storage: Storage, private router: Router) {
     this.startService.getAllCourses().subscribe((list: string[]) => {
       this.courses = list;
+      this.courses.sort();
     });
   }
 

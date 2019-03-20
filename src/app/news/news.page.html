@@ -6,8 +6,14 @@
 
 <ion-content padding>
 
-  <ion-list>
-    <app-news-item *ngFor="let newsItem of news" [news]="newsItem"></app-news-item>
-  </ion-list>
+<ion-grid>
+  <ion-row>
+    <ion-col size-md="6" offset-md="3">
+      <ion-list>
+        <app-news-item *ngFor="let newsItem of news" [news]="newsItem"></app-news-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
 </ion-content>
