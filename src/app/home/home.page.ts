@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { HomeService } from './home.service';
+import { Mensa } from './mensa.model';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +9,25 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  constructor(private storage: Storage) {
+  mensa: Mensa;
+  isReady: boolean;
+
+  constructor(private storage: Storage, private homeService: HomeService) {
 
   }
 
   ngOnInit() {
-    this.storage.get('course').then((data) => {
-      console.log(data);
+
+  }
+
+  ionViewDidEnter() {
+    this.mensa = null;
+    this.isReady = false;
+    this.homeService.getMensaplan().subscribe((mensa: Mensa) => {
+      this.mensa = mensa;
+      this.isReady = true;
+      console.log(this.mensa);
     });
   }
+
 }

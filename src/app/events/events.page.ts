@@ -13,12 +13,15 @@ export class EventsPage implements OnInit {
   constructor(private eventService: EventService) { }
 
   ngOnInit() {
-    this.eventService.getAllEvents().subscribe((events: Event[]) => {
-      this.events = events;
-      this.events.sort((a, b) => {
-        return new Date(b.start).getTime() - new Date(a.start).getTime();
-      });
-    });
+
   }
 
+    ionViewDidEnter() {
+      this.eventService.getAllEvents().subscribe((events: Event[]) => {
+        this.events = events;
+        this.events.sort((a, b) => {
+          return new Date(b.start).getTime() - new Date(a.start).getTime();
+        });
+      });
+    }
 }

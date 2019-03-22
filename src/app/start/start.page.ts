@@ -35,7 +35,9 @@ export class StartPage implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: this.selectedCourse + " saved as selected course.",
+      message: this.selectedCourse + ' saved as selected course.',
+      showCloseButton: true,
+      closeButtonText: 'Dismiss',
       duration: 2000
     });
     toast.present();

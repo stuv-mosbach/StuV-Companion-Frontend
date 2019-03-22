@@ -16,6 +16,11 @@ export class LecturesPage implements OnInit {
   constructor(private lectureService: LectureService, private storage: Storage) { }
 
   ngOnInit() {
+
+  }
+
+  ionViewDidEnter() {
+    this.lectures = null;
     this.storage.get('course').then((data) => {
       this.lectureService.getFutureLectures(data).subscribe((lectures: Lecture[]) => {
         this.lectures = lectures;
@@ -27,11 +32,8 @@ export class LecturesPage implements OnInit {
     });
   }
 
-  ionViewDidEnter() {
-    //todo: need to move the loading here but html needs to be cleared fist to get course changes detected
-  }
-
   initLectureMap() {
+    this.lectureMap = new Map();
     this.lectures.forEach((lecture) => {
       const date: Date = this.getDateWithoutTime(lecture.start);
       if (this.lectureMap.get(date.toString()) !== undefined) {

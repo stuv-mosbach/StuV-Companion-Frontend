@@ -14,6 +14,10 @@ export class NewsPage implements OnInit {
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
+
+  }
+
+  ionViewDidEnter() {
     this.newsService.getNews().subscribe((news: News[]) =>{
       this.news = news;
       this.news.sort((a, b) => {
@@ -21,5 +25,4 @@ export class NewsPage implements OnInit {
       });
     });
   }
-
 }

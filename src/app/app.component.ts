@@ -31,7 +31,7 @@ export class AppComponent {
       }
     });
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      //this.statusBar.styleDefault(); // May cause errors on android will observe if this change fixes it
       this.splashScreen.hide();
     });
   }
