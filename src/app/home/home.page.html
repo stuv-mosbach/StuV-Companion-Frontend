@@ -12,18 +12,30 @@
     <ion-row>
       <ion-col size-md="6" offset-md="3">
 <!-- Events -->
+<ion-label text-wrap>
+ Heutige Events:
+</ion-label>
           <ion-list>
             <app-event-item *ngFor="let event of data[3]" [event]="event"></app-event-item>
           </ion-list>
 <!-- lectures -->
+<ion-label text-wrap>
+ Heutige Vorlesungen:
+</ion-label>
           <ion-list>
             <app-lecture-item *ngFor="let lectureEntry of lectureMap | keyvalue:dateComparator" [lectureList]="lectureEntry.value" [lecturesDate]="lectureEntry.key"></app-lecture-item>
           </ion-list>
 <!-- News -->
+<ion-label text-wrap>
+ Heutige News:
+</ion-label>
           <ion-list>
             <app-news-item *ngFor="let newsItem of data[2]" [news]="newsItem"></app-news-item>
           </ion-list>
 <!-- Mensaplan -->
+<ion-label text-wrap>
+ Heutiges Essen:
+</ion-label>
           <ion-card *ngFor='let mens of data[0]'>
             <ion-card-header>
               <ion-card-title text-center>Mensaplan gültig bis {{mens.validUntil}}</ion-card-title>
