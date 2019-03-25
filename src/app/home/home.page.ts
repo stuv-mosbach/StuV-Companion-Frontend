@@ -26,7 +26,6 @@ export class HomePage implements OnInit {
   ionViewDidEnter() {
     this.selection = [true, true, true, true, true, true, true];
     this.selection[(new Date()).getDay()] = false;
-    this.data = null;
     // this.homeService.getMensaplan().subscribe((mensa: Mensa) => {
     //   this.mensa = mensa;
     //   this.isReady = true;
@@ -34,6 +33,7 @@ export class HomePage implements OnInit {
     // });
     this.storage.get('course').then((data) => {
       this.homeService.getToday(data).subscribe((result: any[]) => {
+        this.data = null;
         this.data = result;
         this.initLectureMap();
         console.log(result);
