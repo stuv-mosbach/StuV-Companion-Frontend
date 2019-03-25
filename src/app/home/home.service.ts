@@ -11,4 +11,8 @@ export class HomeService {
   getMensaplan() {
     return this.http.get("http://dev.stuv-mosbach.de:8080/api/mensaplan");
   }
+
+  getToday(courseId: string) {
+    return this.http.get('http://dev.stuv-mosbach.de:8080/api/getToday/' + courseId.toUpperCase());
+  }
 }

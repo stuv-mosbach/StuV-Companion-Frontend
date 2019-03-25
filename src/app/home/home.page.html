@@ -11,15 +11,26 @@
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3">
-
+<!-- Events -->
+          <ion-list>
+            <app-event-item *ngFor="let event of data[3]" [event]="event"></app-event-item>
+          </ion-list>
+<!-- lectures -->
+          <ion-list>
+            <app-lecture-item *ngFor="let lectureEntry of lectureMap | keyvalue:dateComparator" [lectureList]="lectureEntry.value" [lecturesDate]="lectureEntry.key"></app-lecture-item>
+          </ion-list>
+<!-- News -->
+          <ion-list>
+            <app-news-item *ngFor="let newsItem of data[2]" [news]="newsItem"></app-news-item>
+          </ion-list>
 <!-- Mensaplan -->
-          <ion-card *ngFor='let mens of mensa'>
+          <ion-card *ngFor='let mens of data[0]'>
             <ion-card-header>
               <ion-card-title text-center>Mensaplan gültig bis {{mens.validUntil}}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
 
-              <ion-card>
+              <ion-card [hidden]="selection[1]">
                 <ion-card-header>
                   <ion-card-title text-center>Montag</ion-card-title>
                 </ion-card-header>
@@ -32,7 +43,7 @@
                 </ion-card-content>
               </ion-card>
 
-              <ion-card>
+              <ion-card [hidden]="selection[2]">
                 <ion-card-header>
                   <ion-card-title text-center>Dienstag</ion-card-title>
                 </ion-card-header>
@@ -45,7 +56,7 @@
                 </ion-card-content>
               </ion-card>
 
-              <ion-card>
+              <ion-card [hidden]="selection[3]">
                 <ion-card-header>
                   <ion-card-title text-center>Mittwoch</ion-card-title>
                 </ion-card-header>
@@ -58,7 +69,7 @@
                 </ion-card-content>
               </ion-card>
 
-              <ion-card>
+              <ion-card [hidden]="selection[4]">
                 <ion-card-header>
                   <ion-card-title text-center>Donnerstag</ion-card-title>
                 </ion-card-header>
@@ -71,7 +82,7 @@
                 </ion-card-content>
               </ion-card>
 
-              <ion-card>
+              <ion-card [hidden]="selection[5]">
                 <ion-card-header>
                   <ion-card-title text-center>Freitag</ion-card-title>
                 </ion-card-header>

@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { NewsPage } from './news.page';
-import {NewsItemComponent} from './news-item/news-item.component';
+import { ComponentProviderModule } from '../component-provider/component-provider.module';
 
 const routes: Routes = [
   {
@@ -20,8 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentProviderModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [NewsPage, NewsItemComponent]
+  declarations: [NewsPage]
 })
 export class NewsPageModule {}
