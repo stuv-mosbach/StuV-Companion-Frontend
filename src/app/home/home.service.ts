@@ -9,7 +9,7 @@ export class HomeService {
   constructor(private http: HttpClient) { }
 
   getMensaplan() {
-    return this.http.get("http://dev.stuv-mosbach.de:8080/api/mensaplan");
+    return this.http.get('http://dev.stuv-mosbach.de:8080/api/mensaplan');
   }
 
   getToday(courseId: string) {

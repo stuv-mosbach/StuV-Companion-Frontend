@@ -15,6 +15,10 @@ export class HomePage implements OnInit {
   selection: boolean[];
   lectureMap: Map<string, Lecture[]> = new Map();
 
+  events;
+  news;
+  meals;
+
   constructor(private storage: Storage, private homeService: HomeService) {
 
   }
@@ -35,6 +39,9 @@ export class HomePage implements OnInit {
       this.homeService.getToday(data).subscribe((result: any[]) => {
         this.data = null;
         this.data = result;
+        this.events = this.data[3];
+        this.news = this.data[2];
+        this.meals = this.data[0];
         this.initLectureMap();
         console.log(result);
       });
