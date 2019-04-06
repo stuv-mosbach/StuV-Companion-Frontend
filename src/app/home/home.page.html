@@ -15,7 +15,7 @@
           <div *ngIf="events">
               <ion-label text-wrap>Heutige Events:</ion-label>
               <ion-list>
-                  <app-event-item *ngFor="let event of data[3]" [event]="event"></app-event-item>
+                  <app-event-item *ngFor="let event of events" [event]="event"></app-event-item>
               </ion-list>
           </div>
 
@@ -31,7 +31,7 @@
           <div *ngIf="news.size > 0">
               <ion-label text-wrap>Heutige News:</ion-label>
               <ion-list>
-                  <app-news-item *ngFor="let newsItem of data[2]" [news]="newsItem"></app-news-item>
+                  <app-news-item *ngFor="let newsItem of news" [news]="newsItem"></app-news-item>
               </ion-list>
           </div>
 
