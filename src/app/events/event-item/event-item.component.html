@@ -1,13 +1,12 @@
 <ion-card>
   <ion-card-header>
-    <ion-card-title text-center>{{event.start | date :'EE. dd.MM.yy'}}</ion-card-title>
+    <ion-card-subtitle>{{event.start | date :'EE. dd.MM.yy'}}, {{event.start | date :'HH:mm' :'de-DE'}} - {{event.end | date :'HH:mm'}}</ion-card-subtitle>
+    <ion-card-title>{{event.title}}</ion-card-title>
   </ion-card-header>
   <ion-card-content>
         <ion-label>
-          <p><strong>{{event.title}}</strong></p>
-          <p>{{event.start | date :'HH:mm' :'de-DE'}} - {{event.end | date :'HH:mm'}}</p>
           <p>{{event.description}}</p>
-          <p><span float-left><a href="https://maps.google.com/?q={{event.location}}" target="_blank">{{event.location}}</a></span></p>
+          <p padding-bottom><span float-left><a href="https://maps.google.com/?q={{event.location}}" target="_blank">{{event.location}}</a></span></p>
         </ion-label>
   </ion-card-content>
 </ion-card>

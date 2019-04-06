@@ -9,7 +9,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3">
-
+        <ion-text *ngIf="lectureMap.size == 0">Keine Vorlesungen für heute</ion-text>
         <ion-list>
           <app-lecture-item *ngFor="let lectureEntry of lectureMap | keyvalue:dateComparator" [lectureList]="lectureEntry.value" [lecturesDate]="lectureEntry.key"></app-lecture-item>
         </ion-list>
