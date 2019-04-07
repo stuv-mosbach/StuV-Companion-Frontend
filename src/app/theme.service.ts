@@ -8,6 +8,9 @@ import { Storage } from '@ionic/storage';
 export class ThemeService {
   selectedTheme = new BehaviorSubject('');
 
+  // TODO add better names to themes in select, add bubbles in select with accent colors
+  allThemes = ['dark-red', 'dark-mint', 'dark-blue', 'light-blue', 'light-mint', 'light-red'];
+
   constructor(private storage: Storage) {
     this.storage.get('theme').then((data) => {
       this.selectedTheme.next(data);
@@ -21,5 +24,9 @@ export class ThemeService {
   setTheme(theme: string) {
     this.storage.set('theme', theme);
     this.selectedTheme.next(theme);
+  }
+
+  getAllThemes(): string[] {
+    return this.allThemes;
   }
 }
