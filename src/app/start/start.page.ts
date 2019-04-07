@@ -13,7 +13,7 @@ import {ThemeService} from '../theme.service';
 export class StartPage implements OnInit {
   courses: any[];
   selectedCourse: string;
-  themes: string[] =  ['theme-dark', 'theme-light'];
+  themes: string[] =  ['dark-red', 'dark-mint', 'dark-blue', 'light-blue', 'light-mint', 'light-red'];
   selectedTheme: string;
 
   constructor(private startService: StartService, private toastController: ToastController, private storage: Storage, private router: Router, private themeService: ThemeService) {
