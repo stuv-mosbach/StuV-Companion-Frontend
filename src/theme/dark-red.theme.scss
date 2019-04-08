@@ -1,0 +1,54 @@
+.dark-red {
+
+  *{
+    --background: var(--ion-color-dark-tint);
+    --color: var(--ion-color-dark-contrast);
+  }
+
+  ion-list{
+    background: var(--ion-color-dark-tint);
+  }
+
+  .lectureItem{
+    ion-item, ion-list{
+      background: var(--ion-color-dark);
+      --background: var(--ion-color-dark);
+      --border-color: var(--ion-color-medium);
+    }
+  }
+
+  ion-tab-bar{
+    --background: var(--ion-color-dark-shade);
+  }
+
+  ion-tab-button {
+    --background: var(--ion-color-dark-shade);
+    --color-selected: var(--ion-color-danger-tint);
+    --ripple-color: var(--ion-color-danger-tint);
+  }
+
+  ion-card,
+  ion-card-header{
+    --background: var(--ion-color-dark);
+  }
+
+  ion-button,
+  ion-badge,
+  ion-toolbar{
+    --background: var(--ion-color-danger-tint);
+  }
+
+  a{
+    color: var(--ion-color-danger-tint);
+  }
+
+  ion-card-subtitle,
+  p{
+    --color: var(--ion-color-medium) !important;
+    color: var(--ion-color-medium) !important;
+  }
+
+  ion-toast{
+    --button-color: var(--ion-color-danger-tint);
+  }
+}

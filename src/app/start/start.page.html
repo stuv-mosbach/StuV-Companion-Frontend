@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
   <ion-grid>
     <ion-row>
@@ -15,6 +15,12 @@
             <ion-label>Kurs</ion-label>
             <ion-select placeholder="Select One" [(ngModel)]="selectedCourse">
               <ion-select-option *ngFor="let course of courses">{{course}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Theme</ion-label>
+            <ion-select placeholder="Select One" [(ngModel)]="selectedTheme">
+              <ion-select-option *ngFor="let themeName of themes">{{themeName}}</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>

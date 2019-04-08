@@ -2,8 +2,8 @@
   <ion-card-header>
     <ion-card-title text-center>{{lecturesDate | date :'EE. dd.MM.yy'}}</ion-card-title>
   </ion-card-header>
-  <ion-card-content>
-    <ion-list>
+  <ion-card-content class="lectureItem">
+    <ion-list >
       <ion-item *ngFor="let lecture of lectureList">
         <ion-label>
           <p><strong>{{lecture.title}}</strong></p>
