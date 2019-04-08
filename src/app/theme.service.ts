@@ -9,7 +9,7 @@ export class ThemeService {
   selectedTheme = new BehaviorSubject('');
 
   // TODO add better names to themes in select, add bubbles in select with accent colors
-  allThemes = ['dark-red', 'dark-mint', 'dark-blue', 'light-blue', 'light-mint', 'light-red'];
+  allThemes = ['dark-dhbw-red', 'dark-red', 'dark-mint', 'dark-blue', 'light-dhbw-red', 'light-blue', 'light-mint', 'light-red'];
 
   constructor(private storage: Storage) {
     this.storage.get('theme').then((data) => {
