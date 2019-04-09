@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { Storage } from '@ionic/storage';
 
 @Injectable({
@@ -13,6 +13,9 @@ export class ThemeService {
 
   constructor(private storage: Storage) {
     this.storage.get('theme').then((data) => {
+      if (data === null || data === undefined) {
+        data = 'light-dhbw-red';
+      }
       this.selectedTheme.next(data);
     });
   }
