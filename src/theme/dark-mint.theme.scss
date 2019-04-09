@@ -1,54 +1,105 @@
 .dark-mint {
+  --background-color1: var(--ion-color-dark-tint);
+  --background-color2: var(--ion-color-dark);
+  --background-color3: var(--ion-color-dark-shade);
+  --text-color1: var(--ion-color-dark-contrast);
+  --text-color2: var(--ion-color-medium);
+  --highlight-color: var(--ion-color-secondary-tint);
 
-  *{
-    --background: var(--ion-color-dark-tint);
-    --color: var(--ion-color-dark-contrast);
+  ion-content,
+  ion-list,
+  ion-item,
+  ion-card-title{
+    --background: var(--background-color1);
+    --color: var(--text-color1);
   }
 
   ion-list{
-    background: var(--ion-color-dark-tint);
+    background: var(--background-color1);
   }
 
   .lectureItem{
     ion-item, ion-list{
-      background: var(--ion-color-dark);
-      --background: var(--ion-color-dark);
-      --border-color: var(--ion-color-medium);
+      background: var(--background-color2);
+      --background: var(--background-color2);
+      --border-color: var(--text-color2);
     }
   }
 
   ion-tab-bar{
-    --background: var(--ion-color-dark-shade);
+    --background: var(--background-color3);
   }
 
   ion-tab-button {
-    --background: var(--ion-color-dark-shade);
-    --color-selected: var(--ion-color-secondary-tint);
-    --ripple-color: var(--ion-color-secondary-tint);
+    --background: var(--background-color3);
+    --color-selected: var(--highlight-color);
+    --ripple-color: var(--highlight-color);
   }
 
   ion-card,
   ion-card-header{
-    --background: var(--ion-color-dark);
+    --background: var(--background-color2);
   }
 
   ion-button,
   ion-badge,
   ion-toolbar{
-    --background: var(--ion-color-secondary-tint);
+    --background: var(--highlight-color);
+    --color: var(--text-color1);
   }
 
   a{
-    color: var(--ion-color-secondary-tint);
+    color: var(--highlight-color);
   }
 
   ion-card-subtitle,
   p{
-    --color: var(--ion-color-medium) !important;
-    color: var(--ion-color-medium) !important;
+    --color: var(--text-color2) !important;
+    color: var(--text-color2) !important;
   }
 
   ion-toast{
-    --button-color: var(--ion-color-secondary-tint);
+    --button-color: var(--highlight-color);
+  }
+
+
+  ion-alert {
+    --background: var(--background-color1);
+
+    .alert-title,
+    .alert-radio-label{
+      color: var(--text-color1);
+    }
+
+    .alert-radio-group{
+      border-top: 1px solid var(--text-color1);
+      border-bottom: 1px solid var(--text-color1);
+    }
+
+    .alert-button-inner{
+      color: var(--highlight-color);
+    }
+
+    .alert-radio-inner{
+      background-color: var(--background-color1);
+    }
+
+    [aria-checked=true] {
+      .alert-radio-icon{
+        border-color: var(--highlight-color) !important;
+      }
+      .alert-radio-label{
+        color: var(--highlight-color) !important;
+      }
+
+      .alert-radio-inner.sc-ion-alert-md{
+        background-color: var(--highlight-color) !important;
+      }
+      .alert-radio-inner{
+        border-color: var(--highlight-color) !important;
+      }
+    }
+
+
   }
 }
