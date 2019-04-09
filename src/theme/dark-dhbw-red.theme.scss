@@ -1,10 +1,10 @@
-.light-blue {
-  --background-color1: var(--ion-color-light-tint);
-  --background-color2: var(--ion-color-light);
-  --text-color1: var(--ion-color-light-contrast);
-  --text-color2: var(--ion-color-dark-tint);
-  --text-color3: var(--ion-color-light);
-  --highlight-color: var(--ion-color-primary-tint);
+.dark-dhbw-red {
+  --background-color1: var(--ion-color-dhbw-darkgrey-tint);
+  --background-color2: var(--ion-color-dhbw-darkgrey-shade);
+  --background-color3: var(--ion-color-dhbw-darkgrey);
+  --text-color1: var(--ion-color-dhbw-darkgrey-contrast);
+  --text-color2: var(--ion-color-light-shade);
+  --highlight-color: var(--ion-color-dhbw-red-shade);
 
   ion-content,
   ion-list,
@@ -27,13 +27,14 @@
   }
 
   ion-tab-bar{
-    --background: var(--background-color2);
+    --background: var(--background-color3);
   }
 
   ion-tab-button {
-    --background: var(--background-color2);
+    --background: var(--background-color3);
     --color-selected: var(--highlight-color);
     --ripple-color: var(--highlight-color);
+    --color: var(--text-color2);
   }
 
   ion-card,
@@ -45,7 +46,7 @@
   ion-badge,
   ion-toolbar{
     --background: var(--highlight-color);
-    --color: var(--text-color3);
+    --color: var(--text-color1);
   }
 
   a{
@@ -74,6 +75,10 @@
     .alert-radio-group{
       border-top: 1px solid var(--text-color1);
       border-bottom: 1px solid var(--text-color1);
+    }
+
+    .alert-radio-icon{
+      border-color: var(--text-color2) !important;
     }
 
     .alert-button-inner{
