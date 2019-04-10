@@ -1,21 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Vorlesungen</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Vorlesungen</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size-md="6" offset-md="3">
-        <ion-text *ngIf="lectureMap.size == 0">Keine aktuellen Vorlesungen für diesen Kurs</ion-text>
-        <ion-list>
-          <app-lecture-item *ngFor="let lectureEntry of lectureMap | keyvalue:dateComparator" [lectureList]="lectureEntry.value" [lecturesDate]="lectureEntry.key"></app-lecture-item>
-        </ion-list>
+    <ion-grid>
+        <ion-row>
+            <ion-col size-md="6" offset-md="3">
+                <ion-card *ngIf="lectureMap.size == 0">
+                    <ion-card-header>
+                        <ion-card-title text-center>Keine aktuellen Vorlesungen für diesen Kurs</ion-card-title>
+                    </ion-card-header>
+                </ion-card>
+                <ion-list>
+                    <app-lecture-item *ngFor="let lectureEntry of lectureMap | keyvalue:dateComparator" [lectureList]="lectureEntry.value" [lecturesDate]="lectureEntry.key"></app-lecture-item>
+                </ion-list>
 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
 </ion-content>
