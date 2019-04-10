@@ -15,9 +15,9 @@ export class HomePage implements OnInit {
   selection: boolean[];
   lectureMap: Map<string, Lecture[]> = new Map();
 
-  events;
-  news;
-  meals;
+  events = null;
+  news = null;
+  meals = null;
   mealplan = {
     days: [],
     validUntil: ""
@@ -48,12 +48,17 @@ export class HomePage implements OnInit {
         this.meals = this.data[0][0];
         this.initLectureMap();
         this.initMeals();
-        console.log(this.mealplan);
+        console.log(this.news);
       });
     });
   }
 
   initMeals() {
+    this.mealplan = {
+      days: [],
+      validUntil: ""
+    };
+
     this.mealplan.validUntil = this.meals.validUntil;
     this.mealplan.days.push({
       name: "Montag",
