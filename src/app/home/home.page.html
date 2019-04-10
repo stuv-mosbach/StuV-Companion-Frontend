@@ -1,17 +1,72 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Home
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            Home
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-grid *ngIf="data">
+    <ion-grid>
+        <ion-row>
+            <ion-col size-md="6" offset-md="3">
+
+                <ion-grid>
+                    <ion-row *ngIf="events">
+                        <ion-label text-wrap>Events:</ion-label>
+                        <ion-list>
+                            <app-event-item *ngFor="let event of events" [event]="event"></app-event-item>
+                        </ion-list>
+                    </ion-row>
+
+                    <ion-row *ngIf="lectureMap.size > 0">
+                        <ion-label text-warp>Vorlesungen:</ion-label>
+                        <ion-list>
+                            <app-lecture-item *ngFor="let lectureEntry of lectureMap | keyvalue:dateComparator" [lectureList]="lectureEntry.value" [lecturesDate]="lectureEntry.key"></app-lecture-item>
+                        </ion-list>
+                    </ion-row>
+
+                    <ion-row *ngIf="news">
+                        <ion-label text-wrap>News:</ion-label>
+                        <ion-list>
+                            <app-news-item *ngFor="let newsItem of news" [news]="newsItem"></app-news-item>
+                        </ion-list>
+                    </ion-row>
+
+                    <ion-row *ngIf="mealplan.days.length > 0">
+                        <ion-card-title text-wrap>Essen:</ion-card-title>
+                        <ion-card>
+                            <ion-card-header>
+                                <ion-card-title text-center>Mensaplan gültig bis {{mealplan.validUntil}}</ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content>
+
+                                <ion-card *ngFor="let day of mealplan.days" [hidden]="!day.active">
+                                    <ion-card-header>
+                                        <ion-card-title text-center>{{day.name}}</ion-card-title>
+                                    </ion-card-header>
+                                    <ion-card-content>
+                                        <ion-item *ngFor="let item of day.meals">
+                                            <ion-label text-wrap>
+                                                <p>{{item}}</p>
+                                            </ion-label>
+                                        </ion-item>
+                                    </ion-card-content>
+                                </ion-card>
+
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <!-- <ion-grid *ngIf="data">
     <ion-row>
       <ion-col size-md="6" offset-md="3">
-          <!-- Events -->
           <div *ngIf="events">
               <ion-label text-wrap>Heutige Events:</ion-label>
               <ion-list>
@@ -19,7 +74,6 @@
               </ion-list>
           </div>
 
-          <!-- lectures -->
           <div *ngIf="lectureMap.size > 0">
               <ion-label text-wrap>Heutige Vorlesungen:</ion-label>
               <ion-list>
@@ -27,7 +81,6 @@
               </ion-list>
           </div>
 
-          <!-- News -->
           <div *ngIf="news.size > 0">
               <ion-label text-wrap>Heutige News:</ion-label>
               <ion-list>
@@ -35,7 +88,7 @@
               </ion-list>
           </div>
 
-          <!-- Mensaplan -->
+
           <div *ngIf="meals.size > 0">
               <ion-label text-wrap>Heutiges Essen:</ion-label>
               <ion-card *ngFor='let mens of data[0]'>
@@ -116,6 +169,6 @@
 
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
 </ion-content>

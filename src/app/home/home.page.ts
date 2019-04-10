@@ -18,6 +18,10 @@ export class HomePage implements OnInit {
   events;
   news;
   meals;
+  mealplan = {
+    days: [],
+    validUntil: ""
+  };
 
   constructor(private storage: Storage, private homeService: HomeService) {
 
@@ -41,11 +45,43 @@ export class HomePage implements OnInit {
         this.data = result;
         this.events = this.data[3];
         this.news = this.data[2];
-        this.meals = this.data[0];
+        this.meals = this.data[0][0];
         this.initLectureMap();
-        console.log(result);
+        this.initMeals();
+        console.log(this.mealplan);
       });
     });
+  }
+
+  initMeals() {
+    this.mealplan.validUntil = this.meals.validUntil;
+    this.mealplan.days.push({
+      name: "Montag",
+      active: false,
+      meals: this.meals.montag
+    });
+    this.mealplan.days.push({
+      name: "Dienstag",
+      active: false,
+      meals: this.meals.dienstag
+    });
+    this.mealplan.days.push({
+      name: "Mittwoch",
+      active: false,
+      meals: this.meals.mittwoch
+    });
+    this.mealplan.days.push({
+      name: "Donnerstag",
+      active: false,
+      meals: this.meals.donnerstag
+    });
+    this.mealplan.days.push({
+      name: "Freitag",
+      active: false,
+      meals: this.meals.freitag
+    });
+
+    this.mealplan.days[(new Date()).getDay() - 1].active = true;
   }
 
   initLectureMap() {
