@@ -1,3 +1,7 @@
 ion-card {
-    width: 100% !important;
+    width: 100%;
+}
+
+ion-card-content ion-card {
+    margin: 0;
 }
