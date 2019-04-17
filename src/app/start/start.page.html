@@ -25,6 +25,8 @@
             <ionic-selectable
                     [(ngModel)]="selectedTheme"
                     [items]="themes"
+                    itemValueField="classId"
+                    itemTextField="name"
                     [canSearch]="true"
                     placeholder="Select One">
             </ionic-selectable>

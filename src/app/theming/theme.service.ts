@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { Storage } from '@ionic/storage';
+import {Theme} from './theme.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,16 @@ export class ThemeService {
   selectedTheme = new BehaviorSubject('');
 
   // TODO add better names to themes in select, add bubbles in select with accent colors
-  allThemes = ['dark-dhbw-red', 'dark-red', 'dark-mint', 'dark-blue', 'light-dhbw-red', 'light-blue', 'light-mint', 'light-red'];
+  allThemes: Theme[] = [
+    {name: 'Dark DHBW Red', classId: 'dark-dhbw-red'},
+    {name: 'Dark Red', classId: 'dark-red'},
+    {name: 'Dark Mint', classId: 'dark-mint'},
+    {name: 'Dark Blue', classId: 'dark-blue'},
+    {name: 'Light DHBW Red', classId: 'light-dhbw-red'},
+    {name: 'Light Blue', classId: 'light-blue'},
+    {name: 'Light Mint', classId: 'light-mint'},
+    {name: 'Light Red', classId: 'light-red'}
+  ];
 
   constructor(private storage: Storage) {
     this.storage.get('theme').then((data) => {
@@ -29,7 +39,7 @@ export class ThemeService {
     this.selectedTheme.next(theme);
   }
 
-  getAllThemes(): string[] {
+  getAllThemes(): Theme[] {
     return this.allThemes;
   }
 }
