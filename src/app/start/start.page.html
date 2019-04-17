@@ -13,15 +13,21 @@
         <ion-list>
           <ion-item>
             <ion-label>Kurs</ion-label>
-            <ion-select placeholder="Select One" [(ngModel)]="selectedCourse">
-              <ion-select-option *ngFor="let course of courses">{{course}}</ion-select-option>
-            </ion-select>
+            <ionic-selectable
+                    [(ngModel)]="selectedCourse"
+                    [items]="courses"
+                    [canSearch]="true"
+                    placeholder="Select One">
+            </ionic-selectable>
           </ion-item>
           <ion-item>
             <ion-label>Theme</ion-label>
-            <ion-select placeholder="Select One" [(ngModel)]="selectedTheme">
-              <ion-select-option *ngFor="let themeName of themes">{{themeName}}</ion-select-option>
-            </ion-select>
+            <ionic-selectable
+                    [(ngModel)]="selectedTheme"
+                    [items]="themes"
+                    [canSearch]="true"
+                    placeholder="Select One">
+            </ionic-selectable>
           </ion-item>
         </ion-list>
 
