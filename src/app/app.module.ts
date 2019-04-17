@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicSelectableModule } from 'ionic-selectable';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,8 @@ import { IonicSelectableModule } from 'ionic-selectable';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ReactiveFormsModule
   ],
   bootstrap: [AppComponent]
 })
