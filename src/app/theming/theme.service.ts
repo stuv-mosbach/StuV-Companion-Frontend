@@ -35,8 +35,8 @@ export class ThemeService {
   }
 
   setTheme(theme: string) {
-    this.storage.set('theme', theme);
     this.selectedTheme.next(theme);
+    this.storage.set('theme', theme);
   }
 
   getAllThemes(): Theme[] {

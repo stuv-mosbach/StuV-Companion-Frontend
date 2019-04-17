@@ -44,10 +44,10 @@ export class StartPage implements OnInit {
 
   submit() {
     this.presentToast();
+    this.themeService.setTheme(this.theme.value.classId);
     this.storage.set('active', 'yes');
     this.storage.set('course', this.course.value).then(() => {
-      this.themeService.setTheme(this.theme.value.classId);
-      this.router.navigate(['tabs/home']);
+        this.router.navigate(['tabs/home']);
     });
   }
 
