@@ -9,6 +9,6 @@ export class StartService {
   constructor(private http: HttpClient) {}
 
   getAllCourses() {
-    return this.http.get('http://dev.stuv-mosbach.de:8080/api/courses');
+    return this.http.get('https://api.stuv-mosbach.de/api/courses');
   }
 }

@@ -9,6 +9,6 @@ export class NewsService {
   constructor(private http: HttpClient) { }
 
   getNews() {
-    return this.http.get("http://dev.stuv-mosbach.de:8080/api/news");
+    return this.http.get("https://api.stuv-mosbach.de/api/news");
   }
 }

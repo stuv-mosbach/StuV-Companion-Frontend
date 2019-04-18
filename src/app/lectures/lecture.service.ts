@@ -9,10 +9,10 @@ export class LectureService {
   constructor(private http: HttpClient) { }
 
   getLectures(courseId: string) {
-    return this.http.get('http://dev.stuv-mosbach.de:8080/api/lectures/' + courseId.toUpperCase());
+    return this.http.get('https://api.stuv-mosbach.de/api/lectures/' + courseId.toUpperCase());
   }
 
   getFutureLectures(courseId: string) {
-    return this.http.get('http://dev.stuv-mosbach.de:8080/api/futureLectures/' + courseId.toUpperCase());
+    return this.http.get('https://api.stuv-mosbach.de/api/futureLectures/' + courseId.toUpperCase());
   }
 }
