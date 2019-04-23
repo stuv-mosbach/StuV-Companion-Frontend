@@ -9,23 +9,36 @@
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3">
+        <form [formGroup]="startForm">
+            <ion-list>
+                <ion-item>
+                    <ion-label>Kurs</ion-label>
+                    <ionic-selectable
+                            formControlName="course"
+                            [items]="courses"
+                            [canSearch]="true"
+                            placeholder="Select One">
+                    </ionic-selectable>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Theme</ion-label>
+                    <ionic-selectable
+                            formControlName="theme"
+                            [items]="themes"
+                            itemValueField="classId"
+                            itemTextField="name"
+                            [canSearch]="true"
+                            placeholder="Select One">
+                    </ionic-selectable>
+                </ion-item>
+            </ion-list>
 
-        <ion-list>
-          <ion-item>
-            <ion-label>Kurs</ion-label>
-            <ion-select placeholder="Select One" [(ngModel)]="selectedCourse">
-              <ion-select-option *ngFor="let course of courses">{{course}}</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label>Theme</ion-label>
-            <ion-select placeholder="Select One" [(ngModel)]="selectedTheme">
-              <ion-select-option *ngFor="let themeName of themes">{{themeName}}</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
+            <ion-button expand="block" fill="solid" [disabled]="startForm.invalid" (click)="submit()">Submit</ion-button>
+        </form>
 
-      <ion-button expand="block" fill="solid" (click)="submit()">Submit</ion-button>
+
+
+
 
       </ion-col>
     </ion-row>
