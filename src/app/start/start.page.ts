@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import {ThemeService} from '../theming/theme.service';
 import {Theme} from '../theming/theme.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { IonicSelectableComponent } from 'ionic-selectable';
 
 @Component({
   selector: 'app-start',
@@ -44,7 +45,7 @@ export class StartPage implements OnInit {
 
   submit() {
     this.presentToast();
-    this.themeService.setTheme(this.theme.value.classId);
+    //this.themeService.setTheme(this.theme.value.classId);
     this.storage.set('active', 'yes');
     this.storage.set('course', this.course.value).then(() => {
         this.router.navigate(['tabs/home']);
@@ -59,6 +60,10 @@ export class StartPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  themeChanged(event: {component: IonicSelectableComponent, value: any}) {
+    this.themeService.setTheme(event.value.classId)
   }
 
   get course() {

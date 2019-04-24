@@ -28,7 +28,8 @@
                             itemValueField="classId"
                             itemTextField="name"
                             [canSearch]="true"
-                            placeholder="Select One">
+                            placeholder="Select One"
+                            (onChange)="themeChanged($event)">
                     </ionic-selectable>
                 </ion-item>
             </ion-list>
