@@ -9,8 +9,33 @@
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3">
-          <ion-text>{{selectedCourse}}</ion-text>
-          <ion-text>{{selectedTheme}}</ion-text>
+
+        <form [formGroup]="settingsForm">
+          <ion-list>
+              <ion-item>
+                  <ion-label>Kurs</ion-label>
+                  <ionic-selectable
+                          formControlName="course"
+                          [items]="courses"
+                          [canSearch]="true"
+                          placeholder="Select One"
+                          (onChange)="courseChanged($event)">
+                  </ionic-selectable>
+              </ion-item>
+              <ion-item>
+                  <ion-label>Theme</ion-label>
+                  <ionic-selectable
+                          formControlName="theme"
+                          [items]="themes"
+                          itemValueField="classId"
+                          itemTextField="name"
+                          [canSearch]="true"
+                          placeholder="Select One"
+                          (onChange)="themeChanged($event)">
+                  </ionic-selectable>
+              </ion-item>
+          </ion-list>
+      </form>
         <!-- <ion-list>
             <ion-item>
               <ion-label>Kurs</ion-label>
