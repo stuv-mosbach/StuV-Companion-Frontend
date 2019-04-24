@@ -64,12 +64,15 @@ export class SettingsPage implements OnInit {
   }
 
   courseChanged(event: {component: IonicSelectableComponent, value: any}) {
+    this.storage.set('course', event.value).then(() => {
+      this.presentToast('Course set to ' + event.value)
+    })
     console.log(event.value)
   }
 
   themeChanged(event: {component: IonicSelectableComponent, value: any}) {
     this.themeService.setTheme(event.value.classId)
-    this.presentToast("Theme set to: " + event.value.name)
+    this.presentToast('Theme set to ' + event.value.name)
   }
 
   get course() {
