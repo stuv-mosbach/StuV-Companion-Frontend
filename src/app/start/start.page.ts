@@ -18,6 +18,11 @@ export class StartPage implements OnInit {
   themes: Theme[];
   startForm: FormGroup;
 
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  }
+
 
   constructor(private startService: StartService,
               private toastController: ToastController,

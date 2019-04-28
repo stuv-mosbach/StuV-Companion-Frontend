@@ -9,38 +9,66 @@
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3">
-        <form [formGroup]="startForm">
-            <ion-list>
-                <ion-item>
-                    <ion-label>Kurs</ion-label>
-                    <ionic-selectable
-                            formControlName="course"
-                            [items]="courses"
-                            [canSearch]="true"
-                            placeholder="Select One">
-                    </ionic-selectable>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Theme</ion-label>
-                    <ionic-selectable
-                            formControlName="theme"
-                            [items]="themes"
-                            itemValueField="classId"
-                            itemTextField="name"
-                            [canSearch]="true"
-                            placeholder="Select One"
-                            (onChange)="themeChanged($event)">
-                    </ionic-selectable>
-                </ion-item>
-            </ion-list>
 
-            <ion-button expand="block" fill="solid" [disabled]="startForm.invalid" (click)="submit()">Submit</ion-button>
-        </form>
+        <ion-slides [options]="slideOpts">
+          <ion-slide>
+            <ion-text>
+              <h3>StuV Companion</h3>
+              <h4><i class="far fa-copyright"></i>2019 Verfasste Studierenschaft</h4>
+              <h5>Haftungsausschluss</h5> 
+              <br>
+              Die Informationen auf der Website und der StuV Companion App dient nur zu allgemeinen Informationszwecken.
+              <br>
+              Die Verfasste Studierenschaft übernimmt keine Verantwortung für Fehler oder Auslassungen in den Inhalten auf der Website.
+              <br>
+              In keinem Fall wird eine Haftung für spezielle, direkte, indirekte oder Folgeschäden übernommen,
+              oder zufällige Schäden oder Schäden jeglicher Art, sei es in einer Klage von
+              Vertrag, Fahrlässigkeit oder andere unerlaubte Handlung, die sich aus oder im Zusammenhang mit der
+              der Nutzung des Dienstes oder des Inhalts des Dienstes. Die behält Verfasste Studierenschaft sich das Recht vor, eine
+              Hinzufügung, Löschung oder Änderung der Inhalte des Dienstes an irgendeiner Stelle ohne vorherige Ankündigung vorzunehmen.
+              <br>
+              <h5>Haftungsausschluss für externe Links</h5>
+              Website und StuV Companion mobile App können Links zu externen Websites enthalten.
+              die nicht von oder in irgendeiner Weise mit dem Unternehmen verbunden sind.
+              <br>
+              Bitte beachten Sie, dass die Firma keine Garantie für die Richtigkeit, Aktualität und Aktualität übernimmt,
+              oder die Vollständigkeit der Informationen auf diesen externen Websites.
 
+              <br>
+              Durch das Fortfahren bestätigen Sie, dass Sie den Haftungsausschluss gelesen haben und diesem zustimmen.
+            </ion-text>
+          </ion-slide>
 
-
-
-
+          <ion-slide>
+              <form [formGroup]="startForm">
+                  <ion-list>
+                      <ion-item>
+                          <ion-label>Kurs</ion-label>
+                          <ionic-selectable
+                                  formControlName="course"
+                                  [items]="courses"
+                                  [canSearch]="true"
+                                  placeholder="Select One">
+                          </ionic-selectable>
+                      </ion-item>
+                      <ion-item>
+                          <ion-label>Theme</ion-label>
+                          <ionic-selectable
+                                  formControlName="theme"
+                                  [items]="themes"
+                                  itemValueField="classId"
+                                  itemTextField="name"
+                                  [canSearch]="true"
+                                  placeholder="Select One"
+                                  (onChange)="themeChanged($event)">
+                          </ionic-selectable>
+                      </ion-item>
+                  </ion-list>
+      
+                  <ion-button expand="block" fill="solid" [disabled]="startForm.invalid" (click)="submit()">Submit</ion-button>
+              </form>
+          </ion-slide>
+        </ion-slides>
       </ion-col>
     </ion-row>
   </ion-grid>
