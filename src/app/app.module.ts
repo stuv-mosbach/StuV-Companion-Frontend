@@ -12,16 +12,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicSelectableModule } from 'ionic-selectable';
 import {ReactiveFormsModule} from '@angular/forms';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { AboutPageModule } from './settings/about/about.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), IonicSelectableModule],
+  imports: [BrowserModule, IonicModule.forRoot(),AboutPageModule, AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), IonicSelectableModule],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EmailComposer
   ],
   bootstrap: [AppComponent]
 })

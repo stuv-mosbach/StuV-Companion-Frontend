@@ -7,6 +7,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { SettingsService } from './settings.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { ModalController } from '@ionic/angular';
+import { AboutPage } from './about/about.page';
 
 @Component({
   selector: 'app-settings',
@@ -27,7 +30,9 @@ export class SettingsPage implements OnInit {
     private storage: Storage,
     private router: Router,
     private themeService: ThemeService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private emailComposer: EmailComposer,
+    private modalController: ModalController) { }
 
   ngOnInit() {
     this.ionViewDidEnter()
@@ -80,5 +85,24 @@ export class SettingsPage implements OnInit {
   }
   get theme() {
     return this.settingsForm.get('theme');
+  }
+
+  sendBugReport() {
+      let email = {
+        to: 'it@stuv-mosbach.de',
+        cc: 'bugs@roth-kl.de',
+        subject: '[BugReport] Bug in der StuV Companion Beta',
+        body: 'Bitte hier den Fehler erklären!',
+        isHtml: true
+      }
+
+      this.emailComposer.open(email);
+  }
+
+  async showAbout() {
+    const modal = await this.modalController.create({
+      component: AboutPage
+    });
+    return await modal.present();
   }
 }

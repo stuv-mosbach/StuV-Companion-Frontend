@@ -107,4 +107,9 @@
 
 
   }
+
+  ion-list-header {
+    --background: var(--background-color3);
+    --color: var(--text-color1);
+  }
 }
