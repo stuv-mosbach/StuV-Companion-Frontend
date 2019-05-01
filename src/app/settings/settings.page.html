@@ -34,11 +34,15 @@
                           (onChange)="themeChanged($event)">
                   </ionic-selectable>
               </ion-item>
+              <ion-item>
+                <ion-button expand="full" fill="clear" style="width:100%;" (click)="sendBugReport()">Report a Bug!</ion-button>
+              </ion-item>
+              <ion-item>
+                <ion-button expand="full" fill="clear" style="width:100%;" (click)="showAbout()">About</ion-button>
+              </ion-item>
           </ion-list>
       </form>
 
-      <ion-button expand="block" fill="solid" (click)="sendBugReport()">Report a Bug!</ion-button>
-      <ion-button expand="block" fill="solid" (click)="showAbout()">About</ion-button>
         <!-- <ion-list>
             <ion-item>
               <ion-label>Kurs</ion-label>
