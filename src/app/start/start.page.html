@@ -10,9 +10,10 @@
     <ion-row>
       <ion-col size-md="6" offset-md="3">
 
-        <ion-slides [options]="slideOpts">
+        <ion-slides [options]="slideOpts" #slides>
           <ion-slide>
-            <ion-text>
+            <div>
+            <ion-text style="font-size: 12px;">
               <h3>StuV Companion</h3>
               <h4><i class="far fa-copyright"></i>2019 Verfasste Studierenschaft</h4>
               <h5>Haftungsausschluss</h5> 
@@ -37,6 +38,8 @@
               <br>
               Durch das Fortfahren bestätigen Sie, dass Sie den Haftungsausschluss gelesen haben und diesem zustimmen.
             </ion-text>
+            <ion-button expand="block" fill="solid" (click)="slides.slideNext()">Weiter <i class="fas fa-arrow-right"></i></ion-button>
+          </div>
           </ion-slide>
 
           <ion-slide>

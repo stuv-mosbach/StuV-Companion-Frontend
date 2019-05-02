@@ -18,7 +18,7 @@ import { AboutPageModule } from './settings/about/about.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(),AboutPageModule, AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), IonicSelectableModule],
+  imports: [BrowserModule, AboutPageModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), IonicSelectableModule],
   providers: [
     StatusBar,
     SplashScreen,
