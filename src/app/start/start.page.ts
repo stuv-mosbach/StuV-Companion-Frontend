@@ -53,7 +53,7 @@ export class StartPage implements OnInit {
     //this.themeService.setTheme(this.theme.value.classId);
     this.storage.set('active', 'yes');
     this.storage.set('course', this.course.value).then(() => {
-        this.router.navigate(['tabs/home']);
+        this.router.navigate(['app/tabs/home']);
     });
   }
 

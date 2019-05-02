@@ -35,7 +35,7 @@ export class AppComponent {
       if (data == null || data === 'no') {
         this.router.navigate(['start']);
       } else {
-        this.router.navigate(['tabs/home']);
+        this.router.navigate(['app/tabs/home']);
       }
     });
     this.platform.ready().then(() => {
