@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [scrollEvents]="true">
 
   <ion-grid>
     <ion-row>
@@ -38,7 +38,7 @@
               <br>
               Durch das Fortfahren bestätigen Sie, dass Sie den Haftungsausschluss gelesen haben und diesem zustimmen.
             </ion-text>
-            <ion-button expand="block" fill="solid" (click)="slides.slideNext()">Weiter <i class="fas fa-arrow-right"></i></ion-button>
+            <ion-button expand="block" fill="solid" (click)="slides.slideNext(); ScrollToTop();">Weiter <i class="fas fa-arrow-right"></i></ion-button>
           </div>
           </ion-slide>
 

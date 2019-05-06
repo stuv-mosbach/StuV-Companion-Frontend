@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, IonContent } from '@ionic/angular';
 import { StartService } from './start-service.service';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { IonicSelectableComponent } from 'ionic-selectable';
   styleUrls: ['./start.page.scss'],
 })
 export class StartPage implements OnInit {
+  @ViewChild(IonContent) content: IonContent;
   courses: any[];
   themes: Theme[];
   startForm: FormGroup;
@@ -69,6 +70,10 @@ export class StartPage implements OnInit {
 
   themeChanged(event: {component: IonicSelectableComponent, value: any}) {
     this.themeService.setTheme(event.value.classId)
+  }
+
+  ScrollToTop() {
+    this.content.scrollToTop(1500);
   }
 
   get course() {
