@@ -28,18 +28,21 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.themeService.getTheme().subscribe({
-      next: (dataTheme) => this.theme = dataTheme
-    });
-    this.storage.get('active').then((data) => {
-      if (data == null || data === 'no') {
-        this.router.navigate(['start']);
-      } else {
-        this.router.navigate(['app/tabs/home']);
-      }
-    });
     this.platform.ready().then(() => {
       // this.statusBar.styleDefault(); // May cause errors on android will observe if this change fixes it
+      this.themeService.getTheme().subscribe({
+        next: (dataTheme) => this.theme = dataTheme
+      });
+      this.storage.get('active').then((data) => {
+        if (data == null || data === 'no') {
+          this.router.navigate(['start']);
+        } else {
+          this.router.navigate(['app/tabs/home']);
+        }
+      });
+      this.platform.backButton.subscribeWithPriority(9999, () => {
+        console.log('Blocked backbutton');
+      })
       this.splashScreen.hide();
     });
   }
