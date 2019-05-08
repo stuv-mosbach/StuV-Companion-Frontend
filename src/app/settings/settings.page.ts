@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { ThemeService } from '../theming/theme.service';
@@ -17,6 +17,7 @@ import { AboutPage } from './about/about.page';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
+  @ViewChild('courseSelector') courseSelector: IonicSelectableComponent;
   courses: any[];
   themes: Theme[];
   settingsForm: FormGroup;
@@ -32,7 +33,7 @@ export class SettingsPage implements OnInit {
     private themeService: ThemeService,
     private fb: FormBuilder,
     private emailComposer: EmailComposer,
-    private modalController: ModalController) { }
+    private modalController: ModalController) {}
 
   ngOnInit() {
     this.ionViewDidEnter()
@@ -46,7 +47,7 @@ export class SettingsPage implements OnInit {
     this.themes = this.themeService.getAllThemes();
     this.themeService.getTheme().subscribe((data: string) => {
       this.selectedTheme = data;
-    })
+    });
     this.storage.get('course').then((data: string) => {
       this.selectedCourse = data;
     });
@@ -55,8 +56,6 @@ export class SettingsPage implements OnInit {
       theme: [this.themes[this.themes.map(function (e) { return e.classId }).indexOf(this.selectedTheme)], [Validators.required]]
     });
   }
-
-
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
@@ -72,7 +71,6 @@ export class SettingsPage implements OnInit {
     this.storage.set('course', event.value).then(() => {
       this.presentToast('Course set to ' + event.value)
     })
-    console.log(event.value)
   }
 
   themeChanged(event: {component: IonicSelectableComponent, value: any}) {

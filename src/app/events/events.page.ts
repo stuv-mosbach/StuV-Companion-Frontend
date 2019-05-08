@@ -20,7 +20,7 @@ export class EventsPage implements OnInit {
       this.eventService.getAllEvents().subscribe((events: Event[]) => {
         this.events = events;
         this.events.sort((a, b) => {
-          return new Date(b.start).getTime() - new Date(a.start).getTime();
+          return new Date(a.start).getTime() - new Date(b.start).getTime();
         });
       });
     }
