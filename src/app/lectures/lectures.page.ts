@@ -3,6 +3,8 @@ import { LectureService } from './lecture.service';
 import { Storage } from '@ionic/storage';
 import { Lecture } from './lecture.model';
 import { KeyValue } from '@angular/common';
+import { Observable } from 'rxjs';
+import { CacheService, Cache } from 'ionic-cache-observable';
 
 @Component({
   selector: 'app-lectures',
@@ -10,38 +12,90 @@ import { KeyValue } from '@angular/common';
   styleUrls: ['./lectures.page.scss'],
 })
 export class LecturesPage implements OnInit {
-  lectures: Lecture[];
+  lectures: Observable<Lecture[]>;
+  cache: Cache<Lecture[]>
   lectureMap: Map<string, Lecture[]> = new Map();
+  oldCourse: String;
 
-  constructor(private lectureService: LectureService, private storage: Storage) { }
+  constructor(private lectureService: LectureService, private storage: Storage, private cacheService: CacheService) {
+    storage.get('course').then((courseID) => {
+      this.oldCourse = courseID;
+      const data = lectureService.getFutureLectures(courseID);
+
+      cacheService.register('lectures', data).subscribe((cache) => {
+        this.cache = cache;
+
+        this.lectures = null;
+        this.lectures = this.cache.get$;
+        this.initLectureMap();
+      })
+    })
+   }
 
   ngOnInit() {
 
   }
 
   ionViewDidEnter() {
-    this.lectures = null;
-    this.storage.get('course').then((data) => {
-      this.lectureService.getFutureLectures(data).subscribe((lectures: Lecture[]) => {
-        this.lectures = lectures;
-        this.lectures.sort((a, b) => {
-          return new Date(a.start).getTime() - new Date(b.start).getTime();
-        });
-        this.initLectureMap();
-      });
-    });
+    this.storage.get('course').then((courseID) => {
+      if(this.oldCourse != courseID){
+        this.oldCourse = courseID;
+        const data = this.lectureService.getFutureLectures(courseID);
+  
+        this.cacheService.register('lectures', data).subscribe((cache) => {
+          this.cache = cache;
+  
+          this.lectures = null;
+          this.lectures = this.cache.get$;
+          this.lectureMap = null;
+          this.initLectureMap(); //Known bug: doesnt refresh only on tab change!
+        })
+      } else {
+        if (this.cache) {
+          this.cache.refresh().subscribe(() => {
+            console.log("Lecture Cache updated!");
+            this.initLectureMap();
+          }, (err) => {
+            console.log("Lecture Error: ", err);
+          })
+        }
+      }
+    })
+    // this.lectures = null;
+    // this.storage.get('course').then((data) => {
+    //   this.lectureService.getFutureLectures(data).subscribe((lectures: Lecture[]) => {
+    //     this.lectures = lectures;
+    //     this.lectures.sort((a, b) => {
+    //       return new Date(a.start).getTime() - new Date(b.start).getTime();
+    //     });
+    //     this.initLectureMap();
+    //   });
+    // });
   }
 
   initLectureMap() {
     this.lectureMap = new Map();
-    this.lectures.forEach((lecture) => {
-      const date: Date = this.getDateWithoutTime(lecture.start);
-      if (this.lectureMap.get(date.toString()) !== undefined) {
-        this.lectureMap.get(date.toString()).push(lecture);
-      } else {
-        this.lectureMap.set(date.toString(), Array.of(lecture));
-      }
-    });
+    this.lectures.subscribe(data => {
+      data.sort((a, b) => {
+        return new Date(a.start).getTime() - new Date(b.start).getTime();
+      });
+      data.forEach((lecture) => {
+          const date: Date = this.getDateWithoutTime(lecture.start);
+          if (this.lectureMap.get(date.toString()) !== undefined) {
+            this.lectureMap.get(date.toString()).push(lecture);
+          } else {
+            this.lectureMap.set(date.toString(), Array.of(lecture));
+          }
+        });
+    })
+    // this.lectures.forEach((lecture) => {
+    //   const date: Date = this.getDateWithoutTime(lecture.start);
+    //   if (this.lectureMap.get(date.toString()) !== undefined) {
+    //     this.lectureMap.get(date.toString()).push(lecture);
+    //   } else {
+    //     this.lectureMap.set(date.toString(), Array.of(lecture));
+    //   }
+    // });
     return this.lectureMap;
   }
 
