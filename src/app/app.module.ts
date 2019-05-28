@@ -14,11 +14,14 @@ import { IonicSelectableModule } from 'ionic-selectable';
 import {ReactiveFormsModule} from '@angular/forms';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { AboutPageModule } from './settings/about/about.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { CacheModule } from 'ionic-cache-observable';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, AboutPageModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), IonicSelectableModule],
+  imports: [CacheModule, BrowserModule, AboutPageModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), IonicSelectableModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
     SplashScreen,

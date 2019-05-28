@@ -11,7 +11,7 @@
       <ion-col size-md="6" offset-md="3">
 
         <ion-list>
-          <app-event-item *ngFor="let event of events" [event]="event"></app-event-item>
+          <app-event-item *ngFor="let event of events | async as events" [event]="event"></app-event-item>
         </ion-list>
 
       </ion-col>
