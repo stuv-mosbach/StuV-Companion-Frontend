@@ -107,7 +107,16 @@
 
 
   }
-
+  ion-segment {
+    ion-segment-button {
+      --color-activated: var(--highlight-color);
+      --indicator-color-checked: var(--highlight-color);
+      --color: var(--text-color1);
+      --background-hover: var(--background-color3);
+      --background-activated: var(--highlight-color);
+      --color-checked: var(--highlight-color);
+    }
+  }
   ion-list-header {
     --background: var(--background-color3);
     --color: var(--text-color1);

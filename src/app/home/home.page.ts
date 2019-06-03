@@ -79,6 +79,19 @@ export class HomePage implements OnInit {
     //   });
     // });
   }
+  
+  segmentChanged(ev: any) {
+    if(ev.detail.value == 'today') {
+      this.mealplan.days.forEach(element => {
+        element.active = false;
+      });
+      this.mealplan.days[(new Date()).getDay() - 1].active = true;
+    } else if (ev.detail.value == 'complete') {
+      this.mealplan.days.forEach(element => {
+        element.active = true;
+      });
+    }
+  }
 
   initThis() {
     this.result.subscribe(data => {

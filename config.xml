@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="de.stuv_mosbach.stuvcompanion" version="0.5.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="de.stuv_mosbach.stuvcompanion" version="0.6.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>StuV Companion</name>
     <description>An awesome app to view lectures and events for the DHBW Mosbach</description>
     <author email="it@stuv-mosbach.de" href="http://stuv-mosbach.de/">StuV der DHBW Mosbach</author>
