@@ -9,6 +9,7 @@ import {ThemeService} from './theming/theme.service';
 import { NetworkProviderService } from './network-provider.service';
 import { debounceTime } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
+import { NotificationService } from './notification.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,8 @@ export class AppComponent {
     private router: Router,
     private themeService: ThemeService,
     private networkProviderService: NetworkProviderService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private notificationService: NotificationService
   ) {
     this.initializeApp();
   }
@@ -53,6 +55,7 @@ export class AppComponent {
       this.networkProviderService.getNetworkStatus().pipe(debounceTime(300)).subscribe((connected: boolean) => {
         this.handleNetwork(connected);
       });
+      this.notificationService.init();
     });
   }
 

@@ -18,6 +18,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CacheModule } from 'ionic-cache-observable';
 import { Network } from '@ionic-native/network/ngx';
+import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,8 @@ import { Network } from '@ionic-native/network/ngx';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ReactiveFormsModule,
     EmailComposer,
-    Network
+    Network,
+    PhonegapLocalNotification
   ],
   bootstrap: [AppComponent]
 })
