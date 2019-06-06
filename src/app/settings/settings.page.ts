@@ -59,7 +59,7 @@ export class SettingsPage implements OnInit {
       course: [this.selectedCourse, [Validators.required]],
       theme: [this.themes[this.themes.map(function (e) { return e.classId }).indexOf(this.selectedTheme)], [Validators.required]]
     });
-    //this.notifications = this.notificationService.getPermissionState();
+    this.notifications = this.notificationService.getPermissionState();
   }
 
   async presentToast(message: string) {

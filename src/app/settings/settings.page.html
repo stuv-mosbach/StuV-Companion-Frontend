@@ -38,7 +38,7 @@
  
       </form>
       <ion-item>
-        <ion-label>Benachrichtigungen aktiviert</ion-label><ion-toggle checked="notifications" (ionChange)="notificationsToggle()"></ion-toggle>
+        <ion-label>Benachrichtigungen aktiviert</ion-label><ion-toggle checked="false" [(ngModel)]="notifications" (ionChange)="notificationsToggle()"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-button expand="full" fill="clear" (click)="sendBugReport()"><span>Report a Bug!</span></ion-button>
