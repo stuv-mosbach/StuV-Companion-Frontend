@@ -6,6 +6,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import {ThemeService} from './theming/theme.service';
+import { NetworkProviderService } from './network-provider.service';
+import { debounceTime } from 'rxjs/operators';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +18,7 @@ import {ThemeService} from './theming/theme.service';
 export class AppComponent {
 
   theme: string;
+  networkActive: Boolean = null;
 
   constructor(
     private platform: Platform,
@@ -22,7 +26,9 @@ export class AppComponent {
     private statusBar: StatusBar,
     private storage: Storage,
     private router: Router,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private networkProviderService: NetworkProviderService,
+    private toastController: ToastController
   ) {
     this.initializeApp();
   }
@@ -42,8 +48,26 @@ export class AppComponent {
       });
       this.platform.backButton.subscribeWithPriority(9999, () => {
         console.log('Blocked backbutton');
-      })
+      });
       this.splashScreen.hide();
+      this.networkProviderService.getNetworkStatus().pipe(debounceTime(300)).subscribe((connected: boolean) => {
+        this.handleNetwork(connected);
+      });
     });
+  }
+
+  handleNetwork(status: boolean) {
+    console.log('Network status:' + status);
+    if(!status) this.presentToast('No network connection');
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      showCloseButton: true,
+      closeButtonText: 'Dismiss',
+      duration: 10000
+    });
+    toast.present();
   }
 }

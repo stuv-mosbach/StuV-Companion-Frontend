@@ -17,6 +17,7 @@ import { AboutPageModule } from './settings/about/about.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CacheModule } from 'ionic-cache-observable';
+import { Network } from '@ionic-native/network/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +28,8 @@ import { CacheModule } from 'ionic-cache-observable';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ReactiveFormsModule,
-    EmailComposer
+    EmailComposer,
+    Network
   ],
   bootstrap: [AppComponent]
 })
