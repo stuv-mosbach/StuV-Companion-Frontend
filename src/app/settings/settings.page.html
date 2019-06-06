@@ -9,9 +9,9 @@
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3">
-
+        <ion-list>
         <form [formGroup]="settingsForm">
-          <ion-list>
+          
               <ion-item>
                   <ion-label>Kurs</ion-label>
                   <ionic-selectable
@@ -35,15 +35,18 @@
                           (onChange)="themeChanged($event)">
                   </ionic-selectable>
               </ion-item>
-              <ion-item>
-                <ion-button expand="full" fill="clear" (click)="sendBugReport()"><span>Report a Bug!</span></ion-button>
-              </ion-item>
-              <ion-item>
-                <ion-button expand="full" fill="clear" (click)="showAbout()"><span>About</span></ion-button>
-              </ion-item>
-          </ion-list>
+ 
       </form>
-
+      <ion-item>
+        <ion-label>Benachrichtigungen aktiviert</ion-label><ion-toggle checked="notifications" (ionChange)="notificationsToggle()"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-button expand="full" fill="clear" (click)="sendBugReport()"><span>Report a Bug!</span></ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button expand="full" fill="clear" (click)="showAbout()"><span>About</span></ion-button>
+      </ion-item>
+  </ion-list>
         <!-- <ion-list>
             <ion-item>
               <ion-label>Kurs</ion-label>

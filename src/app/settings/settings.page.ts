@@ -10,6 +10,7 @@ import { IonicSelectableComponent } from 'ionic-selectable';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { ModalController } from '@ionic/angular';
 import { AboutPage } from './about/about.page';
+import { NotificationService } from './../notification.service';
 
 @Component({
   selector: 'app-settings',
@@ -24,6 +25,7 @@ export class SettingsPage implements OnInit {
 
   selectedCourse: string;
   selectedTheme: string;
+  notifications: boolean = false;
 
   constructor(
     private settingsService: SettingsService,
@@ -33,7 +35,9 @@ export class SettingsPage implements OnInit {
     private themeService: ThemeService,
     private fb: FormBuilder,
     private emailComposer: EmailComposer,
-    private modalController: ModalController) {}
+    private modalController: ModalController,
+    private notificationService: NotificationService
+    ) {}
 
   ngOnInit() {
     this.ionViewDidEnter()
@@ -55,6 +59,7 @@ export class SettingsPage implements OnInit {
       course: [this.selectedCourse, [Validators.required]],
       theme: [this.themes[this.themes.map(function (e) { return e.classId }).indexOf(this.selectedTheme)], [Validators.required]]
     });
+    //this.notifications = this.notificationService.getPermissionState();
   }
 
   async presentToast(message: string) {
@@ -83,6 +88,14 @@ export class SettingsPage implements OnInit {
   }
   get theme() {
     return this.settingsForm.get('theme');
+  }
+
+  notificationsToggle() {
+    console.log(this.notifications)
+    if(!this.notifications){
+      this.notificationService.init();
+      this.notifications = this.notificationService.getPermissionState();
+    }
   }
 
   sendBugReport() {
