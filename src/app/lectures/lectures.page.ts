@@ -73,6 +73,41 @@ export class LecturesPage implements OnInit {
     // });
   }
 
+  getAllLectures() {
+    this.storage.get('course').then((courseID) => {
+      if(this.oldCourse != courseID){
+        this.oldCourse = courseID;
+        const data = this.lectureService.getFutureLectures(courseID);
+  
+        this.cacheService.register('all_lectures', data).subscribe((cache) => {
+          this.cache = cache;
+  
+          this.lectures = null;
+          this.lectures = this.cache.get$;
+          this.lectureMap = null;
+          this.initLectureMap(); //Known bug: doesnt refresh only on tab change!
+        })
+      } else {
+        if (this.cache) {
+          this.cache.refresh().subscribe(() => {
+            console.log("Lecture_all Cache updated!");
+            this.initLectureMap();
+          }, (err) => {
+            console.log("Lecture_all Error: ", err);
+          })
+        }
+      }
+    })
+  }
+
+  segmentChanged(ev: any) {
+    if(ev.detail.value == 'future') {
+      this.ionViewDidEnter();
+    } else if (ev.detail.value == 'all') {
+      this.getAllLectures();
+    }
+  }
+
   initLectureMap() {
     this.lectureMap = new Map();
     this.lectures.subscribe(data => {
