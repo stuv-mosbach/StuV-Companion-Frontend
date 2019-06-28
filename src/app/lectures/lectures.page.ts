@@ -61,43 +61,19 @@ export class LecturesPage implements OnInit {
         }
       }
     })
-    // this.lectures = null;
-    // this.storage.get('course').then((data) => {
-    //   this.lectureService.getFutureLectures(data).subscribe((lectures: Lecture[]) => {
-    //     this.lectures = lectures;
-    //     this.lectures.sort((a, b) => {
-    //       return new Date(a.start).getTime() - new Date(b.start).getTime();
-    //     });
-    //     this.initLectureMap();
-    //   });
-    // });
   }
 
   getAllLectures() {
     this.storage.get('course').then((courseID) => {
       if(this.oldCourse != courseID){
         this.oldCourse = courseID;
-        const data = this.lectureService.getFutureLectures(courseID);
-  
-        this.cacheService.register('all_lectures', data).subscribe((cache) => {
-          this.cache = cache;
-  
-          this.lectures = null;
-          this.lectures = this.cache.get$;
-          this.lectureMap = null;
-          this.initLectureMap(); //Known bug: doesnt refresh only on tab change!
-        })
-      } else {
-        if (this.cache) {
-          this.cache.refresh().subscribe(() => {
-            console.log("Lecture_all Cache updated!");
-            this.initLectureMap();
-          }, (err) => {
-            console.log("Lecture_all Error: ", err);
-          })
-        }
       }
-    })
+      this.lectures = null;
+      this.lectureService.getLectures(courseID).subscribe(data => {
+        this.lectures = Observable.of(data);
+        this.initLectureMap();
+      })
+    });
   }
 
   segmentChanged(ev: any) {
@@ -123,14 +99,6 @@ export class LecturesPage implements OnInit {
           }
         });
     })
-    // this.lectures.forEach((lecture) => {
-    //   const date: Date = this.getDateWithoutTime(lecture.start);
-    //   if (this.lectureMap.get(date.toString()) !== undefined) {
-    //     this.lectureMap.get(date.toString()).push(lecture);
-    //   } else {
-    //     this.lectureMap.set(date.toString(), Array.of(lecture));
-    //   }
-    // });
     return this.lectureMap;
   }
 
