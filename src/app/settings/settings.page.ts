@@ -37,7 +37,14 @@ export class SettingsPage implements OnInit {
     private emailComposer: EmailComposer,
     private modalController: ModalController,
     private notificationService: NotificationService
-    ) {}
+    ) 
+    {
+      this.emailComposer.isAvailable().then((available: boolean) =>{
+        if(!available) {
+          this.presentToast("E-Mail Service is unavailable!");
+        }
+       });
+    }
 
   ngOnInit() {
     this.ionViewDidEnter()
