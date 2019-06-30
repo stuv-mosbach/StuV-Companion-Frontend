@@ -39,11 +39,11 @@ export class SettingsPage implements OnInit {
     private notificationService: NotificationService
     ) 
     {
-      this.emailComposer.isAvailable().then((available: boolean) =>{
-        if(!available) {
-          this.presentToast("E-Mail Service is unavailable!");
-        }
-       });
+      // emailComposer.isAvailable().then((available: boolean) =>{ // TODO: fix emailcheck
+      //   if(!available) {
+      //     this.presentToast("E-Mail Service is unavailable!");
+      //   }
+      //  });
     }
 
   ngOnInit() {
