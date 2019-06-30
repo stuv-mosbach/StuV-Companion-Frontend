@@ -9,7 +9,6 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
-
 // themes
 @import 'theme/dark-mint.theme';
 @import 'theme/dark-red.theme';
@@ -19,3 +18,8 @@
 @import 'theme/light-red.theme';
 @import 'theme/dark-dhbw-red.theme';
 @import 'theme/light-dhbw-red.theme';
+ion-card img {
+    display: inline-block !important;
+    width: auto !important;
+    height: auto;
+}

@@ -9,8 +9,11 @@ import {News} from '../news.model';
 export class NewsItemComponent implements OnInit {
   @Input() news: News;
 
-  constructor() { }
+  constructor() { 
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.news.description)
+  }
 
 }
