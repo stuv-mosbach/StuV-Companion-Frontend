@@ -10,14 +10,19 @@ import { Observable } from 'rxjs';
   styleUrls: ['./events.page.scss'],
 })
 export class EventsPage implements OnInit {
-  events: Observable<Event>;
-  cache: Cache<Event>;
+  events: Observable<Event[]>;
+  cache: Cache<Event[]>;
 
   constructor(private eventService: EventService, private cacheService: CacheService) {
      const data = eventService.getAllEvents();
      cacheService.register('events', data).subscribe((cache) => {
        this.cache = cache;
        this.events = this.cache.get$;
+       this.events.subscribe(data => {
+         data.sort((a, b) => {
+          return new Date(a.start).getTime() - new Date(b.start).getTime();
+        });
+       })
      })
    }
 
