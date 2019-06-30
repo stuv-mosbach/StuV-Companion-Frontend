@@ -11,7 +11,7 @@ export class NetworkProviderService {
   private online$: Observable<boolean> = undefined;
 
   constructor(private network: Network, private platform: Platform) {
-    this.online$ = Observable.create(observer => {
+    this.online$ = new Observable(observer => {
       observer.next(true);
     }).pipe(mapTo(true));
 

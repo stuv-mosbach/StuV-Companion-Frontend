@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
-import {ThemeService} from './theming/theme.service';
+import { ThemeService } from './theming/theme.service';
 import { NetworkProviderService } from './network-provider.service';
 import { debounceTime } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
@@ -61,7 +61,7 @@ export class AppComponent {
 
   handleNetwork(status: boolean) {
     console.log('Network status:' + status);
-    if(!status) this.presentToast('No network connection');
+    if (!status) { this.presentToast('No network connection'); }
   }
 
   async presentToast(message: string) {

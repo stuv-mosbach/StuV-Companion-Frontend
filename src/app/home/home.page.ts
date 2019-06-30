@@ -24,7 +24,7 @@ export class HomePage implements OnInit {
   meals = null;
   mealplan = {
     days: [],
-    validUntil: ""
+    validUntil: ''
   };
 
   constructor(private storage: Storage, private homeService: HomeService, private cacheService: CacheService) {
@@ -46,47 +46,35 @@ export class HomePage implements OnInit {
 
   ionViewDidEnter() {
     this.storage.get('course').then((courseID) => {
-      if(this.oldCourse != courseID){
+      if (this.oldCourse !== courseID) {
         this.oldCourse = courseID;
         const data = this.homeService.getToday(courseID);
         this.cacheService.register('today', data).subscribe(cache => {
           this.cache = cache;
-  
+
           this.result = this.cache.get$;
           this.initThis();
         });
       } else {
         if (this.cache) {
           this.cache.refresh().subscribe(() => {
-            console.log("Home Cache updated!");
+            console.log('Home Cache updated!');
             this.initThis();
           }, (err) => {
-            console.log("Home Error: ", err);
-          })
+            console.log('Home Error: ', err);
+          });
         }
       }
-    })
-    // this.storage.get('course').then((data) => {
-    //   this.homeService.getToday(data).subscribe((result: any[]) => {
-    //     console.log(result);
-    //     this.data = null;
-    //     this.data = result;
-    //     this.events = this.data[3];
-    //     this.news = this.data[2];
-    //     this.meals = this.data[0][0];
-    //     this.initLectureMap();
-    //     this.initMeals();
-    //   });
-    // });
+    });
   }
-  
+
   segmentChanged(ev: any) {
-    if(ev.detail.value == 'today') {
+    if (ev.detail.value === 'today') {
       this.mealplan.days.forEach(element => {
         element.active = false;
       });
       this.mealplan.days[(new Date()).getDay() - 1].active = true;
-    } else if (ev.detail.value == 'complete') {
+    } else if (ev.detail.value === 'complete') {
       this.mealplan.days.forEach(element => {
         element.active = true;
       });
@@ -107,32 +95,32 @@ export class HomePage implements OnInit {
   initMeals() {
     this.mealplan = {
       days: [],
-      validUntil: ""
+      validUntil: ''
     };
 
     this.mealplan.validUntil = this.meals.validUntil;
     this.mealplan.days.push({
-      name: "Montag",
+      name: 'Montag',
       active: false,
       meals: this.meals.montag
     });
     this.mealplan.days.push({
-      name: "Dienstag",
+      name: 'Dienstag',
       active: false,
       meals: this.meals.dienstag
     });
     this.mealplan.days.push({
-      name: "Mittwoch",
+      name: 'Mittwoch',
       active: false,
       meals: this.meals.mittwoch
     });
     this.mealplan.days.push({
-      name: "Donnerstag",
+      name: 'Donnerstag',
       active: false,
       meals: this.meals.donnerstag
     });
     this.mealplan.days.push({
-      name: "Freitag",
+      name: 'Freitag',
       active: false,
       meals: this.meals.freitag
     });
@@ -159,7 +147,7 @@ export class HomePage implements OnInit {
     return newDate;
   }
 
-  dateComparator(a: KeyValue <string, Lecture[]>, b: KeyValue<string, Lecture[]>) {
+  dateComparator(a: KeyValue<string, Lecture[]>, b: KeyValue<string, Lecture[]>) {
     return new Date(a.key).getTime() - new Date(b.key).getTime();
   }
 

@@ -1,8 +1,8 @@
 {
     "name": "StuV-Companion",
     "version": "0.7.1",
-    "author": "Ionic Framework",
-    "homepage": "https://ionicframework.com/",
+    "author": "Lars Roth",
+    "homepage": "https://app.stuv-mosbach.de",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",

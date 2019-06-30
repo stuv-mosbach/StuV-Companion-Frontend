@@ -13,7 +13,7 @@ import { CacheService, Cache } from 'ionic-cache-observable';
 })
 export class LecturesPage implements OnInit {
   lectures: Observable<Lecture[]>;
-  cache: Cache<Lecture[]>
+  cache: Cache<Lecture[]>;
   lectureMap: Map<string, Lecture[]> = new Map();
   oldCourse: String;
 
@@ -28,9 +28,9 @@ export class LecturesPage implements OnInit {
         this.lectures = null;
         this.lectures = this.cache.get$;
         this.initLectureMap();
-      })
-    })
-   }
+      });
+    });
+  }
 
   ngOnInit() {
 
@@ -38,48 +38,48 @@ export class LecturesPage implements OnInit {
 
   ionViewDidEnter() {
     this.storage.get('course').then((courseID) => {
-      if(this.oldCourse != courseID){
+      if (this.oldCourse !== courseID) {
         this.oldCourse = courseID;
         const data = this.lectureService.getFutureLectures(courseID);
-  
+
         this.cacheService.register('lectures', data).subscribe((cache) => {
           this.cache = cache;
-  
+
           this.lectures = null;
           this.lectures = this.cache.get$;
           this.lectureMap = null;
-          this.initLectureMap(); //Known bug: doesnt refresh only on tab change!
-        })
+          this.initLectureMap(); // Known bug: doesnt refresh only on tab change!
+        });
       } else {
         if (this.cache) {
           this.cache.refresh().subscribe(() => {
-            console.log("Lecture Cache updated!");
+            console.log('Lecture Cache updated!');
             this.initLectureMap();
           }, (err) => {
-            console.log("Lecture Error: ", err);
-          })
+            console.log('Lecture Error: ', err);
+          });
         }
       }
-    })
+    });
   }
 
   getAllLectures() {
     this.storage.get('course').then((courseID) => {
-      if(this.oldCourse != courseID){
+      if (this.oldCourse !== courseID) {
         this.oldCourse = courseID;
       }
       this.lectures = null;
       this.lectureService.getLectures(courseID).subscribe(data => {
         this.lectures = Observable.of(data);
         this.initLectureMap();
-      })
+      });
     });
   }
 
   segmentChanged(ev: any) {
-    if(ev.detail.value == 'future') {
+    if (ev.detail.value === 'future') {
       this.ionViewDidEnter();
-    } else if (ev.detail.value == 'all') {
+    } else if (ev.detail.value === 'all') {
       this.getAllLectures();
     }
   }
@@ -91,14 +91,14 @@ export class LecturesPage implements OnInit {
         return new Date(a.start).getTime() - new Date(b.start).getTime();
       });
       data.forEach((lecture) => {
-          const date: Date = this.getDateWithoutTime(lecture.start);
-          if (this.lectureMap.get(date.toString()) !== undefined) {
-            this.lectureMap.get(date.toString()).push(lecture);
-          } else {
-            this.lectureMap.set(date.toString(), Array.of(lecture));
-          }
-        });
-    })
+        const date: Date = this.getDateWithoutTime(lecture.start);
+        if (this.lectureMap.get(date.toString()) !== undefined) {
+          this.lectureMap.get(date.toString()).push(lecture);
+        } else {
+          this.lectureMap.set(date.toString(), Array.of(lecture));
+        }
+      });
+    });
     return this.lectureMap;
   }
 
@@ -108,7 +108,7 @@ export class LecturesPage implements OnInit {
     return newDate;
   }
 
-  dateComparator(a: KeyValue <string, Lecture[]>, b: KeyValue<string, Lecture[]>) {
+  dateComparator(a: KeyValue<string, Lecture[]>, b: KeyValue<string, Lecture[]>) {
     return new Date(a.key).getTime() - new Date(b.key).getTime();
   }
 }

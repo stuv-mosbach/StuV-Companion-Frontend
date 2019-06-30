@@ -3,9 +3,9 @@ import { ToastController, IonContent } from '@ionic/angular';
 import { StartService } from './start-service.service';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
-import {ThemeService} from '../theming/theme.service';
-import {Theme} from '../theming/theme.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { ThemeService } from '../theming/theme.service';
+import { Theme } from '../theming/theme.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicSelectableComponent } from 'ionic-selectable';
 
 @Component({
@@ -22,39 +22,39 @@ export class StartPage implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 400
-  }
+  };
 
 
   constructor(private startService: StartService,
-              private toastController: ToastController,
-              private storage: Storage,
-              private router: Router,
-              private themeService: ThemeService,
-              private fb: FormBuilder) {
+    private toastController: ToastController,
+    private storage: Storage,
+    private router: Router,
+    private themeService: ThemeService,
+    private fb: FormBuilder) {
   }
 
   ngOnInit() {
-      this.startService.getAllCourses().subscribe((list: string[]) => {
-          this.courses = list;
-          this.courses.sort();
-      });
+    this.startService.getAllCourses().subscribe((list: string[]) => {
+      this.courses = list;
+      this.courses.sort();
+    });
     this.themes = this.themeService.getAllThemes();
     this.startForm = this.fb.group({
-        course: ['', [
-            Validators.required
-        ]],
-        theme: ['', [
-            Validators.required
-        ]]
+      course: ['', [
+        Validators.required
+      ]],
+      theme: ['', [
+        Validators.required
+      ]]
     });
   }
 
   submit() {
     this.presentToast();
-    //this.themeService.setTheme(this.theme.value.classId);
+    // this.themeService.setTheme(this.theme.value.classId);
     this.storage.set('active', 'yes');
     this.storage.set('course', this.course.value).then(() => {
-        this.router.navigate(['app/tabs/home']);
+      this.router.navigate(['app/tabs/home']);
     });
   }
 
@@ -68,8 +68,8 @@ export class StartPage implements OnInit {
     toast.present();
   }
 
-  themeChanged(event: {component: IonicSelectableComponent, value: any}) {
-    this.themeService.setTheme(event.value.classId)
+  themeChanged(event: { component: IonicSelectableComponent, value: any }) {
+    this.themeService.setTheme(event.value.classId);
   }
 
   ScrollToTop() {
@@ -77,9 +77,9 @@ export class StartPage implements OnInit {
   }
 
   get course() {
-      return this.startForm.get('course');
+    return this.startForm.get('course');
   }
   get theme() {
-      return this.startForm.get('theme');
+    return this.startForm.get('theme');
   }
 }

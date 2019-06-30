@@ -5,15 +5,15 @@ import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notifica
   providedIn: 'root'
 })
 export class NotificationService {
-  private gotPermission: boolean = false;
+  private gotPermission = false;
 
   constructor(private localNotifications: PhonegapLocalNotification) {
 
-   }
+  }
 
   init() {
     this.localNotifications.requestPermission().then((permission) => {
-      if(permission === 'granted') {
+      if (permission === 'granted') {
         this.gotPermission = true;
         this.fireSimpleNotification('Benachrichtigungen', 'Du hast die Benachrichtigungen für die StuV Companion App aktiviert.', 'startup');
       }

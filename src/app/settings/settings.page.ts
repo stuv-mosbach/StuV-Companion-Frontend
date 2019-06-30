@@ -25,7 +25,7 @@ export class SettingsPage implements OnInit {
 
   selectedCourse: string;
   selectedTheme: string;
-  notifications: boolean = false;
+  notifications = false;
 
   constructor(
     private settingsService: SettingsService,
@@ -37,17 +37,16 @@ export class SettingsPage implements OnInit {
     private emailComposer: EmailComposer,
     private modalController: ModalController,
     private notificationService: NotificationService
-    ) 
-    {
-      // emailComposer.isAvailable().then((available: boolean) =>{ // TODO: fix emailcheck
-      //   if(!available) {
-      //     this.presentToast("E-Mail Service is unavailable!");
-      //   }
-      //  });
-    }
+  ) {
+    // emailComposer.isAvailable().then((available: boolean) =>{ // TODO: fix emailcheck
+    //   if(!available) {
+    //     this.presentToast("E-Mail Service is unavailable!");
+    //   }
+    //  });
+  }
 
   ngOnInit() {
-    this.ionViewDidEnter()
+    this.ionViewDidEnter();
   }
 
   ionViewDidEnter() {
@@ -64,7 +63,7 @@ export class SettingsPage implements OnInit {
     });
     this.settingsForm = this.fb.group({
       course: [this.selectedCourse, [Validators.required]],
-      theme: [this.themes[this.themes.map(function (e) { return e.classId }).indexOf(this.selectedTheme)], [Validators.required]]
+      theme: [this.themes[this.themes.map(function (e) { return e.classId; }).indexOf(this.selectedTheme)], [Validators.required]]
     });
     this.notifications = this.notificationService.getPermissionState();
   }
@@ -79,15 +78,15 @@ export class SettingsPage implements OnInit {
     toast.present();
   }
 
-  courseChanged(event: {component: IonicSelectableComponent, value: any}) {
+  courseChanged(event: { component: IonicSelectableComponent, value: any }) {
     this.storage.set('course', event.value).then(() => {
-      this.presentToast('Course set to ' + event.value)
-    })
+      this.presentToast('Course set to ' + event.value);
+    });
   }
 
-  themeChanged(event: {component: IonicSelectableComponent, value: any}) {
-    this.themeService.setTheme(event.value.classId)
-    this.presentToast('Theme set to ' + event.value.name)
+  themeChanged(event: { component: IonicSelectableComponent, value: any }) {
+    this.themeService.setTheme(event.value.classId);
+    this.presentToast('Theme set to ' + event.value.name);
   }
 
   get course() {
@@ -98,23 +97,22 @@ export class SettingsPage implements OnInit {
   }
 
   notificationsToggle() {
-    console.log(this.notifications)
-    if(!this.notifications){
+    if (!this.notifications) {
       this.notificationService.init();
       this.notifications = this.notificationService.getPermissionState();
     }
   }
 
   sendBugReport() {
-      let email = {
-        to: 'it@stuv-mosbach.de',
-        cc: 'bugs@roth-kl.de',
-        subject: '[BugReport] Bug in der StuV Companion Beta',
-        body: 'Bitte hier den Fehler erklären!',
-        isHtml: true
-      }
+    const email = {
+      to: 'it@stuv-mosbach.de',
+      cc: 'bugs@roth-kl.de',
+      subject: '[BugReport] Bug in der StuV Companion Beta',
+      body: 'Bitte hier den Fehler erklären!',
+      isHtml: true
+    };
 
-      this.emailComposer.open(email);
+    this.emailComposer.open(email);
   }
 
   async showAbout() {

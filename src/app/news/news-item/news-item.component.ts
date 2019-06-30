@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {News} from '../news.model';
+import { News } from '../news.model';
 
 @Component({
   selector: 'app-news-item',
@@ -9,11 +9,10 @@ import {News} from '../news.model';
 export class NewsItemComponent implements OnInit {
   @Input() news: News;
 
-  constructor() { 
+  constructor() {
   }
 
   ngOnInit() {
-    console.log(this.news.description)
   }
 
 }

@@ -11,6 +11,6 @@ export class NewsService {
   constructor(private http: HttpClient) { }
 
   getNews(): Observable<News[]> {
-    return this.http.get<News[]>("https://api.stuv-mosbach.de/api/news");
+    return this.http.get<News[]>('https://api.stuv-mosbach.de/api/news');
   }
 }
