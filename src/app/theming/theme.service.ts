@@ -18,7 +18,8 @@ export class ThemeService {
     {name: 'Light DHBW Red', classId: 'light-dhbw-red'},
     {name: 'Light Blue', classId: 'light-blue'},
     {name: 'Light Mint', classId: 'light-mint'},
-    {name: 'Light Red', classId: 'light-red'}
+    {name: 'Light Red', classId: 'light-red'},
+    {name: 'Grey', classId: 'greyness'}
   ];
 
   constructor(private storage: Storage) {
