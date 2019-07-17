@@ -1,11 +1,11 @@
 .dark-red {
-    --background-color1: var(--ion-color-dark-tint);
-    --background-color2: var(--ion-color-dark);
-    --background-color3: var(--ion-color-dark-shade);
-    --text-color1: var(--ion-color-dark-contrast);
-    --text-color2: var(--ion-color-medium);
-    --highlight-color: var(--ion-color-danger-tint);
-    --hover-color: var(--ion-color-danger-shade);
+    --background-color1: #657b83; //light
+    --background-color2: #586e75; //medium
+    --background-color3: #073642; //dark 002b36 darker
+    --text-color1: #839496;
+    --text-color2: #93a1a1;
+    --highlight-color: #eee8d5;
+    --hover-color: #fdf6e3;
     ion-content,
     ion-list,
     ion-item,
