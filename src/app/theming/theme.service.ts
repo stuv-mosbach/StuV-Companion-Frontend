@@ -19,7 +19,7 @@ export class ThemeService {
     {name: 'Light Blue', classId: 'light-blue'},
     {name: 'Light Mint', classId: 'light-mint'},
     {name: 'Light Red', classId: 'light-red'},
-    {name: 'Grey', classId: 'greyness'}
+    {name: 'Grey [WIP]', classId: 'greyness'}
   ];
 
   constructor(private storage: Storage) {

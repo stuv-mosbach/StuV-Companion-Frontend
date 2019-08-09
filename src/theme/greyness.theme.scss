@@ -2,8 +2,8 @@
     --background-color1: #657b83; //light
     --background-color2: #586e75; //medium
     --background-color3: #073642; //dark 002b36 darker
-    --text-color1: #839496;
-    --text-color2: #93a1a1;
+    --text-color1: #eee8d5;
+    --text-color2: #eee8d5;
     --highlight-color: #eee8d5;
     --hover-color: #fdf6e3;
     ion-content,
@@ -38,7 +38,7 @@
     }
     ion-badge,
     ion-toolbar {
-        --background: var(--highlight-color);
+        --background: var(--background-color3);
         --color: var(--text-color1);
     }
     a {
@@ -46,8 +46,10 @@
     }
     ion-card-subtitle,
     p {
-        --color: var(--text-color2) !important;
-        color: var(--text-color2) !important;
+        --color: var(--text-color1) !important;
+    }
+    ion-card-content {
+        --color: var(--text-color1) !important;
     }
     ion-toast {
         --button-color: var(--highlight-color);
@@ -101,7 +103,7 @@
     }
     ion-button {
         --background: var(--highlight-color);
-        --color: var(--text-color3);
+        --color: var(--background-color2);
         --background-hover: var(--hover-color);
         --background-activated: var(--hover-color);
     }
