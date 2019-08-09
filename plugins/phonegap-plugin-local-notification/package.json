@@ -1,0 +1,70 @@
+{
+  "_args": [
+    [
+      "phonegap-plugin-local-notification@1.0.1",
+      "/home/supporterino/Entwicklung/StuV-Repos/StuV-Companion-Frontend"
+    ]
+  ],
+  "_from": "phonegap-plugin-local-notification@1.0.1",
+  "_id": "phonegap-plugin-local-notification@1.0.1",
+  "_inBundle": false,
+  "_integrity": "sha1-GE9D+1TcARE8y6V5oDrO66eVqds=",
+  "_location": "/phonegap-plugin-local-notification",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "phonegap-plugin-local-notification@1.0.1",
+    "name": "phonegap-plugin-local-notification",
+    "escapedName": "phonegap-plugin-local-notification",
+    "rawSpec": "1.0.1",
+    "saveSpec": null,
+    "fetchSpec": "1.0.1"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/phonegap-plugin-local-notification/-/phonegap-plugin-local-notification-1.0.1.tgz",
+  "_spec": "1.0.1",
+  "_where": "/home/supporterino/Entwicklung/StuV-Repos/StuV-Companion-Frontend",
+  "author": {
+    "name": "Adobe PhoneGap Team"
+  },
+  "bugs": {
+    "url": "http://github.com/phonegap/phonegap-plugin-local-notification/issues"
+  },
+  "cordova": {
+    "id": "phonegap-plugin-local-notification",
+    "platforms": [
+      "ios",
+      "android",
+      "windows"
+    ]
+  },
+  "description": "phonegap-plugin-local-notification ------------------------",
+  "devDependencies": {
+    "jasmine-node": "1.14.5",
+    "jsdoc-to-markdown": "^3.0.0",
+    "pluginpub": "^0.0.8"
+  },
+  "engines": {
+    "cordova": ">=3.0.0"
+  },
+  "homepage": "http://github.com/phonegap/phonegap-plugin-local-notification#readme",
+  "keywords": [
+    "ecosystem:cordova",
+    "ecosystem:phonegap"
+  ],
+  "license": "MIT",
+  "name": "phonegap-plugin-local-notification",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/phonegap/phonegap-plugin-local-notification.git"
+  },
+  "scripts": {
+    "build": "npm run build:docs && npm test",
+    "build:docs": "jsdoc2md www/notification.js > docs/api.md",
+    "test": "jasmine-node --color spec"
+  },
+  "version": "1.0.1"
+}
