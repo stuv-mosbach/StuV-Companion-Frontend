@@ -30,7 +30,7 @@ export class EventsPage implements OnInit {
 
   }
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     let eventsObservable: Observable<Event[]> = this.eventService.getAllEvents();
 
     this.cacheService
@@ -50,11 +50,13 @@ export class EventsPage implements OnInit {
   }
 
   updateEvents() {
+    // not in use
     this.cacheService
       .get('eventCache')
       .mergeMap((cache: Cache<Event[]>) => cache.refresh())
       .subscribe((data) => {
         this.events = data;
-      })
+      });
+    console.log('Eventscache updated!')
   }
 }

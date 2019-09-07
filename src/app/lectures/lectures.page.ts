@@ -13,68 +13,78 @@ import { NotificationService } from '../notification.service';
   styleUrls: ['./lectures.page.scss'],
 })
 export class LecturesPage implements OnInit {
-  lectures: Observable<Lecture[]>;
-  cache: Cache<Lecture[]>;
+  lectures: Lecture[];
+  //cache: Cache<Lecture[]>;
   lectureMap: Map<string, Lecture[]> = new Map();
-  oldCourse: String;
+  //oldCourse: String;
 
   constructor(private lectureService: LectureService, private storage: Storage, private cacheService: CacheService, private notifications: NotificationService) {
-    storage.get('course').then((courseID) => {
-      this.oldCourse = courseID;
-      const data = lectureService.getFutureLectures(courseID);
+    // storage.get('course').then((courseID) => {
+    //   this.oldCourse = courseID;
+    //   const data = lectureService.getFutureLectures(courseID);
 
-      cacheService.register('lectures', data).subscribe((cache) => {
-        this.cache = cache;
+    //   cacheService.register('lectures', data).subscribe((cache) => {
+    //     this.cache = cache;
 
-        this.lectures = null;
-        this.lectures = this.cache.get$;
-        this.initLectureMap();
-      });
-    });
+    //     this.lectures = null;
+    //     this.lectures = this.cache.get$;
+    //     this.initLectureMap();
+    //   });
+    // });
   }
 
   ngOnInit() {
 
   }
 
-  ionViewDidEnter() {
-    this.storage.get('course').then((courseID) => {
-      if (this.oldCourse !== courseID) {
-        this.oldCourse = courseID;
-        const data = this.lectureService.getFutureLectures(courseID);
+  ionViewWillEnter() {
+    this.storage.get('course').then(courseID => {
+      let lectureObservable = this.lectureService.getFutureLectures(courseID);
+      this.cacheService
+        .register('lectureCache', lectureObservable)
+        .mergeMap((cache: Cache<Lecture[]>) => cache.get())
+        .subscribe(data => {
+          this.lectures = data;
+          this.initLectureMap();
+        })
+    })
+    // this.storage.get('course').then((courseID) => {
+    //   if (this.oldCourse !== courseID) {
+    //     this.oldCourse = courseID;
+    //     const data = this.lectureService.getFutureLectures(courseID);
 
-        this.cacheService.register('lectures', data).subscribe((cache) => {
-          this.cache = cache;
+    //     this.cacheService.register('lectures', data).subscribe((cache) => {
+    //       this.cache = cache;
 
-          this.lectures = null;
-          this.lectures = this.cache.get$;
-          this.lectureMap = null;
-          this.initLectureMap(); // Known bug: doesnt refresh only on tab change!
-        });
-      } else {
-        if (this.cache) {
-          this.cache.refresh().subscribe(() => {
-            console.log('Lecture Cache updated!');
-            this.initLectureMap();
-          }, (err) => {
-            console.log('Lecture Error: ', err);
-          });
-        }
-      }
-    });
+    //       this.lectures = null;
+    //       this.lectures = this.cache.get$;
+    //       this.lectureMap = null;
+    //       this.initLectureMap(); // Known bug: doesnt refresh only on tab change!
+    //     });
+    //   } else {
+    //     if (this.cache) {
+    //       this.cache.refresh().subscribe(() => {
+    //         console.log('Lecture Cache updated!');
+    //         this.initLectureMap();
+    //       }, (err) => {
+    //         console.log('Lecture Error: ', err);
+    //       });
+    //     }
+    //   }
+    // });
   }
 
   getAllLectures() {
-    this.storage.get('course').then((courseID) => {
-      if (this.oldCourse !== courseID) {
-        this.oldCourse = courseID;
-      }
-      this.lectures = null;
-      this.lectureService.getLectures(courseID).subscribe(data => {
-        this.lectures = Observable.of(data);
-        this.initLectureMap();
-      });
-    });
+    // this.storage.get('course').then((courseID) => {
+    //   if (this.oldCourse !== courseID) {
+    //     this.oldCourse = courseID;
+    //   }
+    //   this.lectures = null;
+    //   this.lectureService.getLectures(courseID).subscribe(data => {
+    //     this.lectures = Observable.of(data);
+    //     this.initLectureMap();
+    //   });
+    // });
   }
 
   // Changing Bar at top
@@ -92,18 +102,16 @@ export class LecturesPage implements OnInit {
 
   initLectureMap() {
     this.lectureMap = new Map();
-    this.lectures.subscribe(data => {
-      data.sort((a, b) => {
+    this.lectures.sort((a, b) => {
         return new Date(a.start).getTime() - new Date(b.start).getTime();
-      });
-      data.forEach((lecture) => {
-        const date: Date = this.getDateWithoutTime(lecture.start);
-        if (this.lectureMap.get(date.toString()) !== undefined) {
-          this.lectureMap.get(date.toString()).push(lecture);
-        } else {
-          this.lectureMap.set(date.toString(), Array.of(lecture));
-        }
-      });
+    });
+    this.lectures.forEach((lecture) => {
+      const date: Date = this.getDateWithoutTime(lecture.start);
+      if (this.lectureMap.get(date.toString()) !== undefined) {
+        this.lectureMap.get(date.toString()).push(lecture);
+      } else {
+        this.lectureMap.set(date.toString(), Array.of(lecture));
+      }
     });
     return this.lectureMap;
   }

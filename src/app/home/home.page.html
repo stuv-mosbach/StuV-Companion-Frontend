@@ -11,7 +11,11 @@
     <ion-grid>
         <ion-row>
             <ion-col size-md="6" offset-md="3">
-
+                <ion-card *ngIf="weekend == True">
+                    <ion-card-header>
+                        <ion-card-title text-center>Keine aktuellen Vorlesungen für diesen Kurs</ion-card-title>
+                    </ion-card-header>
+                </ion-card>
                 <ion-grid>
                     <ion-row *ngIf="events.length > 0">
                         <ion-card>
@@ -61,15 +65,15 @@
                                 <ion-card-title text-center>Mensaplan gültig bis {{mealplan.validUntil}}</ion-card-title>
                             </ion-card-header>
                             <ion-card-content>
-                                
+
                                 <ion-segment (ionChange)="segmentChanged($event)" value="today">
                                     <ion-segment-button value="today">
-                                      <ion-label>Heute</ion-label>
+                                        <ion-label>Heute</ion-label>
                                     </ion-segment-button>
                                     <ion-segment-button value="complete">
-                                      <ion-label>ganze Woche</ion-label>
+                                        <ion-label>ganze Woche</ion-label>
                                     </ion-segment-button>
-                                  </ion-segment>
+                                </ion-segment>
 
                                 <ion-card *ngFor="let day of mealplan.days" [hidden]="!day.active">
                                     <ion-card-header>
