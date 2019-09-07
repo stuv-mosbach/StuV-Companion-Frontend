@@ -5,6 +5,7 @@ import { Lecture } from './lecture.model';
 import { KeyValue } from '@angular/common';
 import { Observable } from 'rxjs';
 import { CacheService, Cache } from 'ionic-cache-observable';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-lectures',
@@ -17,7 +18,7 @@ export class LecturesPage implements OnInit {
   lectureMap: Map<string, Lecture[]> = new Map();
   oldCourse: String;
 
-  constructor(private lectureService: LectureService, private storage: Storage, private cacheService: CacheService) {
+  constructor(private lectureService: LectureService, private storage: Storage, private cacheService: CacheService, private notifications: NotificationService) {
     storage.get('course').then((courseID) => {
       this.oldCourse = courseID;
       const data = lectureService.getFutureLectures(courseID);
@@ -76,6 +77,8 @@ export class LecturesPage implements OnInit {
     });
   }
 
+  // Changing Bar at top
+
   segmentChanged(ev: any) {
     if (ev.detail.value === 'future') {
       this.ionViewDidEnter();
@@ -83,6 +86,9 @@ export class LecturesPage implements OnInit {
       this.getAllLectures();
     }
   }
+
+
+  // Lecture Handling
 
   initLectureMap() {
     this.lectureMap = new Map();

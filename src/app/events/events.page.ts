@@ -10,20 +10,20 @@ import { Observable } from 'rxjs';
   styleUrls: ['./events.page.scss'],
 })
 export class EventsPage implements OnInit {
-  events: Observable<Event[]>;
-  cache: Cache<Event[]>;
+  events: Event[];
+  //cache: Cache<Event[]>;
 
   constructor(private eventService: EventService, private cacheService: CacheService) {
-    const data = eventService.getAllEvents();
-    cacheService.register('events', data).subscribe((cache) => {
-      this.cache = cache;
-      this.events = this.cache.get$;
-      this.events.subscribe(event => {
-        event.sort((a, b) => {
-          return new Date(a.start).getTime() - new Date(b.start).getTime();
-        });
-      });
-    });
+    // const data = eventService.getAllEvents();
+    // cacheService.register('events', data).subscribe((cache) => {
+    //   this.cache = cache;
+    //   this.events = this.cache.get$;
+    //   this.events.subscribe(event => {
+    //     event.sort((a, b) => {
+    //       return new Date(a.start).getTime() - new Date(b.start).getTime();
+    //     });
+    //   });
+    // });
   }
 
   ngOnInit() {
@@ -31,12 +31,30 @@ export class EventsPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    if (this.cache) {
-      this.cache.refresh().subscribe(() => {
-        console.log('Events Cache updated!');
-      }, (err) => {
-        console.log('Cache Error: ', err);
-      });
-    }
+    let eventsObservable: Observable<Event[]> = this.eventService.getAllEvents();
+
+    this.cacheService
+      .register('eventCache', eventsObservable)
+      .mergeMap((cache: Cache<Event[]>) => cache.get())
+      .subscribe((data) => {
+        this.events = data;
+      })
+    // if (this.cache) {
+    //   this.cache.refresh().subscribe((data) => {
+    //     console.log('Events Cache updated!');
+    //     console.log(data);
+    //   }, (err) => {
+    //     console.log('Cache Error: ', err);
+    //   });
+    // }
+  }
+
+  updateEvents() {
+    this.cacheService
+      .get('eventCache')
+      .mergeMap((cache: Cache<Event[]>) => cache.refresh())
+      .subscribe((data) => {
+        this.events = data;
+      })
   }
 }
