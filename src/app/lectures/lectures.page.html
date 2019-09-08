@@ -17,8 +17,9 @@
                         <ion-label>alle Vorlesungen</ion-label>
                     </ion-segment-button>
                 </ion-segment>-->
+                <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searching()" *ngIf="lectureMap.size > 0 || searchTerm != ''"></ion-searchbar>
                 <ion-list>
-                    <ion-card *ngIf="lectureMap.size == 0">
+                    <ion-card *ngIf="lectureMap.size == 0 && searchTerm == ''">
                         <ion-card-header>
                             <ion-card-title text-center>Keine aktuellen Vorlesungen für diesen Kurs</ion-card-title>
                         </ion-card-header>

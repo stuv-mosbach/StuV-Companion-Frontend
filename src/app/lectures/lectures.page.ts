@@ -17,6 +17,7 @@ export class LecturesPage implements OnInit {
   //cache: Cache<Lecture[]>;
   lectureMap: Map<string, Lecture[]> = new Map();
   //oldCourse: String;
+  searchTerm = '';
 
   constructor(private lectureService: LectureService, private storage: Storage, private cacheService: CacheService, private notifications: NotificationService) {
     // storage.get('course').then((courseID) => {
@@ -45,7 +46,7 @@ export class LecturesPage implements OnInit {
         .mergeMap((cache: Cache<Lecture[]>) => cache.get())
         .subscribe(data => {
           this.lectures = data;
-          this.initLectureMap();
+          this.initLectureMap(this.searchTerm);
         })
     })
     // this.storage.get('course').then((courseID) => {
@@ -74,17 +75,8 @@ export class LecturesPage implements OnInit {
     // });
   }
 
-  getAllLectures() {
-    // this.storage.get('course').then((courseID) => {
-    //   if (this.oldCourse !== courseID) {
-    //     this.oldCourse = courseID;
-    //   }
-    //   this.lectures = null;
-    //   this.lectureService.getLectures(courseID).subscribe(data => {
-    //     this.lectures = Observable.of(data);
-    //     this.initLectureMap();
-    //   });
-    // });
+  searching() {
+    this.initLectureMap(this.searchTerm);
   }
 
   // Changing Bar at top - unused
@@ -93,19 +85,22 @@ export class LecturesPage implements OnInit {
     if (ev.detail.value === 'future') {
       //this.ionViewDidEnter();
     } else if (ev.detail.value === 'all') {
-      this.getAllLectures();
+      //this.getAllLectures();
     }
   }
 
 
   // Lecture Handling
 
-  initLectureMap() {
+  initLectureMap(term) {
     this.lectureMap = new Map();
-    this.lectures.sort((a, b) => {
+    let filteredLectures = this.lectures.filter(item => {
+      return item.title.toLowerCase().indexOf(term.toLowerCase()) > -1;
+    })
+    filteredLectures.sort((a, b) => {
         return new Date(a.start).getTime() - new Date(b.start).getTime();
     });
-    this.lectures.forEach((lecture) => {
+    filteredLectures.forEach((lecture) => {
       const date: Date = this.getDateWithoutTime(lecture.start);
       if (this.lectureMap.get(date.toString()) !== undefined) {
         this.lectureMap.get(date.toString()).push(lecture);

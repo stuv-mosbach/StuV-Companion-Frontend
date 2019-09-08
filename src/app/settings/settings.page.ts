@@ -37,13 +37,7 @@ export class SettingsPage implements OnInit {
     private emailComposer: EmailComposer,
     private modalController: ModalController,
     private notificationService: NotificationService
-  ) {
-    // emailComposer.isAvailable().then((available: boolean) =>{ // TODO: fix emailcheck
-    //   if(!available) {
-    //     this.presentToast("E-Mail Service is unavailable!");
-    //   }
-    //  });
-  }
+  ) { }
 
   ngOnInit() {
     this.ionViewDidEnter();
@@ -107,7 +101,7 @@ export class SettingsPage implements OnInit {
     const email = {
       to: 'it@stuv-mosbach.de',
       cc: 'bugs@roth-kl.de',
-      subject: '[BugReport] Bug in der StuV Companion Beta',
+      subject: '[BugReport] Bug in der StuV Companion',
       body: 'Bitte hier den Fehler erklären!',
       isHtml: true
     };
