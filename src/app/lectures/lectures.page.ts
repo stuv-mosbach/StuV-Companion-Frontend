@@ -87,11 +87,11 @@ export class LecturesPage implements OnInit {
     // });
   }
 
-  // Changing Bar at top
+  // Changing Bar at top - unused
 
   segmentChanged(ev: any) {
     if (ev.detail.value === 'future') {
-      this.ionViewDidEnter();
+      //this.ionViewDidEnter();
     } else if (ev.detail.value === 'all') {
       this.getAllLectures();
     }

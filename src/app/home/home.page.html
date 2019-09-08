@@ -11,12 +11,14 @@
     <ion-grid>
         <ion-row>
             <ion-col size-md="6" offset-md="3">
-                <ion-card *ngIf="weekend == True">
-                    <ion-card-header>
-                        <ion-card-title text-center>Keine aktuellen Vorlesungen für diesen Kurs</ion-card-title>
-                    </ion-card-header>
-                </ion-card>
                 <ion-grid>
+                    <ion-row *ngIf="weekend == true">
+                        <ion-card>
+                            <ion-card-header>
+                                <ion-card-title text-center>Keine Vorlesungen und kein Mensaplan, da es Wochenende ist.</ion-card-title>
+                            </ion-card-header>
+                        </ion-card>
+                    </ion-row>
                     <ion-row *ngIf="events.length > 0">
                         <ion-card>
                             <ion-card-header>
