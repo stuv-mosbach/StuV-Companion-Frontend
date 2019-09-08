@@ -14,25 +14,10 @@ import { NotificationService } from '../notification.service';
 })
 export class LecturesPage implements OnInit {
   lectures: Lecture[];
-  //cache: Cache<Lecture[]>;
   lectureMap: Map<string, Lecture[]> = new Map();
-  //oldCourse: String;
   searchTerm = '';
 
-  constructor(private lectureService: LectureService, private storage: Storage, private cacheService: CacheService, private notifications: NotificationService) {
-    // storage.get('course').then((courseID) => {
-    //   this.oldCourse = courseID;
-    //   const data = lectureService.getFutureLectures(courseID);
-
-    //   cacheService.register('lectures', data).subscribe((cache) => {
-    //     this.cache = cache;
-
-    //     this.lectures = null;
-    //     this.lectures = this.cache.get$;
-    //     this.initLectureMap();
-    //   });
-    // });
-  }
+  constructor(private lectureService: LectureService, private storage: Storage, private cacheService: CacheService, private notifications: NotificationService) { }
 
   ngOnInit() {
 
@@ -47,32 +32,19 @@ export class LecturesPage implements OnInit {
         .subscribe(data => {
           this.lectures = data;
           this.initLectureMap(this.searchTerm);
-        })
-    })
-    // this.storage.get('course').then((courseID) => {
-    //   if (this.oldCourse !== courseID) {
-    //     this.oldCourse = courseID;
-    //     const data = this.lectureService.getFutureLectures(courseID);
+        });
+    });
+    this.updateLectures();
+  }
 
-    //     this.cacheService.register('lectures', data).subscribe((cache) => {
-    //       this.cache = cache;
-
-    //       this.lectures = null;
-    //       this.lectures = this.cache.get$;
-    //       this.lectureMap = null;
-    //       this.initLectureMap(); // Known bug: doesnt refresh only on tab change!
-    //     });
-    //   } else {
-    //     if (this.cache) {
-    //       this.cache.refresh().subscribe(() => {
-    //         console.log('Lecture Cache updated!');
-    //         this.initLectureMap();
-    //       }, (err) => {
-    //         console.log('Lecture Error: ', err);
-    //       });
-    //     }
-    //   }
-    // });
+  updateLectures() {
+    this.cacheService
+      .get('lectureCache')
+      .mergeMap((cache: Cache<Lecture[]>) => cache.refresh())
+      .subscribe(data => {
+        this.lectures = data;
+        this.initLectureMap(this.searchTerm);
+      })
   }
 
   searching() {

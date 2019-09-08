@@ -59,29 +59,23 @@ export class HomePage implements OnInit {
           this.meals = this.data[0][0];
           this.initLectureMap();
           this.initMeals();
-          })
-    })
-    // this.storage.get('course').then((courseID) => {
-    //   if (this.oldCourse !== courseID) {
-    //     this.oldCourse = courseID;
-    //     const data = this.homeService.getToday(courseID);
-    //     this.cacheService.register('today', data).subscribe(cache => {
-    //       this.cache = cache;
+          });
+    });
+    this.updateHome();
+  }
 
-    //       this.result = this.cache.get$;
-    //       this.initThis();
-    //     });
-    //   } else {
-    //     if (this.cache) {
-    //       this.cache.refresh().subscribe(() => {
-    //         console.log('Home Cache updated!');
-    //         this.initThis();
-    //       }, (err) => {
-    //         console.log('Home Error: ', err);
-    //       });
-    //     }
-    //   }
-    // });
+  updateHome() {
+    this.cacheService
+      .get('homeCache')
+      .mergeMap((cache: Cache<any[]>) => cache.refresh())
+      .subscribe(data => {
+        this.data = data;
+        this.events = this.data[3];
+        this.news = this.data[2];
+        this.meals = this.data[0][0];
+        this.initLectureMap();
+        this.initMeals();
+      });
   }
 
   segmentChanged(ev: any) {

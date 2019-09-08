@@ -47,10 +47,10 @@ export class EventsPage implements OnInit {
     //     console.log('Cache Error: ', err);
     //   });
     // }
+    this.updateEvents();
   }
 
   updateEvents() {
-    // not in use
     this.cacheService
       .get('eventCache')
       .mergeMap((cache: Cache<Event[]>) => cache.refresh())

@@ -56,5 +56,17 @@ export class NewsPage implements OnInit {
   //       console.log('News Error: ', err);
   //     });
   //   }
+    this.updateNews();
+  }
+
+  updateNews() {
+    this.cacheService
+      .get('newsCache')
+      .mergeMap((cache: Cache<News[]>) => cache.refresh())
+      .subscribe((data) => {
+        this.news = data.sort((a, b) => {
+          return new Date(b.created).getTime() - new Date(a.created).getTime();
+        })
+      })
   }
 }
