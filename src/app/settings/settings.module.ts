@@ -22,8 +22,10 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     IonicSelectableModule,
+    //AboutPageModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SettingsPage]
+  declarations: [SettingsPage],
+  entryComponents: []
 })
 export class SettingsPageModule {}

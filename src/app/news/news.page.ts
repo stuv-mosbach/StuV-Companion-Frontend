@@ -11,41 +11,62 @@ import { CacheService, Cache } from 'ionic-cache-observable';
   styleUrls: ['./news.page.scss'],
 })
 export class NewsPage implements OnInit {
-  news: Observable<News[]>;
-  cache: Cache<News[]>;
+  news: News[];
+  //cache: Cache<News[]>;
 
   constructor(private newsService: NewsService, private cacheService: CacheService) {
-    const data = newsService.getNews();
-    cacheService.register('news', data).subscribe((cache) => {
-      this.cache = cache;
+    // const data = newsService.getNews();
+    // cacheService.register('news', data).subscribe((cache) => {
+    //   this.cache = cache;
 
-      this.news = this.cache.get$;
-      this.news = this.news.map(e => {
-        e.sort((a, b) => {
-          return new Date(b.created).getTime() - new Date(a.created).getTime();
-        });
-        return e;
-      });
-    });
+    //   this.news = this.cache.get$;
+    //   this.news = this.news.map(e => {
+    //     e.sort((a, b) => {
+    //       return new Date(b.created).getTime() - new Date(a.created).getTime();
+    //     });
+    //     return e;
+    //   });
+    // });
   }
 
   ngOnInit() {
 
   }
 
-  ionViewDidEnter() {
-    if (this.cache) {
-      this.cache.refresh().subscribe(() => {
-        console.log('News Cache updated!');
-        this.news = this.news.map(data => {
-          data.sort((a, b) => {
-            return new Date(b.created).getTime() - new Date(a.created).getTime();
-          });
-          return data;
+  ionViewWillEnter() {
+    let newsObservable = this.newsService.getNews();
+    this.cacheService
+      .register('newsCache', newsObservable)
+      .mergeMap((cache: Cache<News[]>) => cache.get())
+      .subscribe(data => {
+        this.news = data.sort((a, b) => {
+          return new Date(b.created).getTime() - new Date(a.created).getTime();
+        })
         });
-      }, (err) => {
-        console.log('News Error: ', err);
-      });
-    }
+  //   if (this.cache) {
+  //     this.cache.refresh().subscribe(() => {
+  //       console.log('News Cache updated!');
+  //       this.news = this.news.map(data => {
+  //         data.sort((a, b) => {
+  //           return new Date(b.created).getTime() - new Date(a.created).getTime();
+  //         });
+  //         return data;
+  //       });
+  //     }, (err) => {
+  //       console.log('News Error: ', err);
+  //     });
+  //   }
+    this.updateNews();
+  }
+
+  updateNews() {
+    this.cacheService
+      .get('newsCache')
+      .mergeMap((cache: Cache<News[]>) => cache.refresh())
+      .subscribe((data) => {
+        this.news = data.sort((a, b) => {
+          return new Date(b.created).getTime() - new Date(a.created).getTime();
+        })
+      })
   }
 }

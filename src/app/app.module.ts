@@ -23,7 +23,7 @@ import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notifica
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [CacheModule, BrowserModule, AboutPageModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), IonicSelectableModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+  imports: [AboutPageModule, CacheModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), IonicSelectableModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
     SplashScreen,

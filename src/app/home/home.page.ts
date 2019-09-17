@@ -12,11 +12,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  result: Observable<any[]>;
   lectureMap: Map<string, Lecture[]> = new Map();
 
-  cache: Cache<any[]>;
-  oldCourse: String;
+  //cache: Cache<any[]>;
+  //oldCourse: String;
   data: any[];
 
   events = [];
@@ -26,46 +25,57 @@ export class HomePage implements OnInit {
     days: [],
     validUntil: ''
   };
+  weekend = false;
 
   constructor(private storage: Storage, private homeService: HomeService, private cacheService: CacheService) {
-    storage.get('course').then(courseID => {
-      this.oldCourse = courseID;
-      const data = homeService.getToday(courseID);
-      cacheService.register('today', data).subscribe(cache => {
-        this.cache = cache;
+    // storage.get('course').then(courseID => {
+    //   this.oldCourse = courseID;
+    //   const data = homeService.getToday(courseID);
+    //   cacheService.register('today', data).subscribe(cache => {
+    //     this.cache = cache;
 
-        this.result = this.cache.get$;
-        this.initThis();
-      });
-    });
+    //     this.result = this.cache.get$;
+    //     this.initThis();
+    //   });
+    // });
   }
 
   ngOnInit() {
 
   }
 
-  ionViewDidEnter() {
-    this.storage.get('course').then((courseID) => {
-      if (this.oldCourse !== courseID) {
-        this.oldCourse = courseID;
-        const data = this.homeService.getToday(courseID);
-        this.cacheService.register('today', data).subscribe(cache => {
-          this.cache = cache;
-
-          this.result = this.cache.get$;
-          this.initThis();
-        });
-      } else {
-        if (this.cache) {
-          this.cache.refresh().subscribe(() => {
-            console.log('Home Cache updated!');
-            this.initThis();
-          }, (err) => {
-            console.log('Home Error: ', err);
+  ionViewWillEnter() {
+    this.weekend = false;
+    if ((new Date()).getDay() == 0 || (new Date()).getDay() == 6) this.weekend = true;
+    this.storage.get('course').then(courseID => {
+      let homeObservable = this.homeService.getToday(courseID);
+      this.cacheService
+        .register('homeCache', homeObservable)
+        .mergeMap((cache: Cache<any[]>) => cache.get())
+        .subscribe(data => {
+          this.data = data;
+          this.events = this.data[3];
+          this.news = this.data[2];
+          this.meals = this.data[0][0];
+          this.initLectureMap();
+          this.initMeals();
           });
-        }
-      }
     });
+    this.updateHome();
+  }
+
+  updateHome() {
+    this.cacheService
+      .get('homeCache')
+      .mergeMap((cache: Cache<any[]>) => cache.refresh())
+      .subscribe(data => {
+        this.data = data;
+        this.events = this.data[3];
+        this.news = this.data[2];
+        this.meals = this.data[0][0];
+        this.initLectureMap();
+        this.initMeals();
+      });
   }
 
   segmentChanged(ev: any) {
@@ -79,17 +89,6 @@ export class HomePage implements OnInit {
         element.active = true;
       });
     }
-  }
-
-  initThis() {
-    this.result.subscribe(data => {
-      this.data = data;
-      this.events = this.data[3];
-      this.news = this.data[2];
-      this.meals = this.data[0][0];
-      this.initLectureMap();
-      this.initMeals();
-    });
   }
 
   initMeals() {

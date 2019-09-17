@@ -9,16 +9,17 @@
     <ion-grid>
         <ion-row>
             <ion-col size-md="6" offset-md="3">
-                <ion-segment (ionChange)="segmentChanged($event)" value="future">
+                <!--<ion-segment (ionChange)="segmentChanged($event)" value="future">
                     <ion-segment-button value="future">
                         <ion-label>zukünftige Vorlesungen</ion-label>
                     </ion-segment-button>
                     <ion-segment-button value="all">
                         <ion-label>alle Vorlesungen</ion-label>
                     </ion-segment-button>
-                </ion-segment>
+                </ion-segment>-->
+                <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searching()" *ngIf="lectureMap.size > 0 || searchTerm != ''"></ion-searchbar>
                 <ion-list>
-                    <ion-card *ngIf="lectureMap.size == 0">
+                    <ion-card *ngIf="lectureMap.size == 0 && searchTerm == ''">
                         <ion-card-header>
                             <ion-card-title text-center>Keine aktuellen Vorlesungen für diesen Kurs</ion-card-title>
                         </ion-card-header>
