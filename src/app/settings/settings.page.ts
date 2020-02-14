@@ -65,9 +65,16 @@ export class SettingsPage implements OnInit {
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
-      showCloseButton: true,
-      closeButtonText: 'Dismiss',
-      duration: 2000
+      duration: 2000,
+      buttons: [
+        {
+          text: "Dismiss",
+          role: 'cancel',
+          handler: () => {
+            console.log('Network toast dismissed.');
+          }
+        }
+      ]
     });
     toast.present();
   }

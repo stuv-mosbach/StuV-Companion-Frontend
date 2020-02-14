@@ -61,9 +61,16 @@ export class StartPage implements OnInit {
   async presentToast() {
     const toast = await this.toastController.create({
       message: this.course.value + ' saved as selected course.',
-      showCloseButton: true,
-      closeButtonText: 'Dismiss',
-      duration: 2000
+      duration: 2000,
+      buttons: [
+        {
+          text: "Dismiss",
+          role: 'cancel',
+          handler: () => {
+            console.log('Network toast dismissed.');
+          }
+        }
+      ]
     });
     toast.present();
   }
