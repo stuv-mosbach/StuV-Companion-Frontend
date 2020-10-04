@@ -38,4 +38,4 @@ jobs:
             # Password or personal access token used to log in to a Docker registry. If not set then no login will occur
             password: ${{ secrets.dockerhubpw }}
             # Docker repository to tag the image with
-            repository: supporterino/stuv-frontend
+            repository: supporterino/stuv-frontend:latest
