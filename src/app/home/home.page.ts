@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 export class HomePage implements OnInit {
   lectureMap: Map<string, Lecture[]> = new Map();
 
+  //test
   //cache: Cache<any[]>;
   //oldCourse: String;
   data: any[];
