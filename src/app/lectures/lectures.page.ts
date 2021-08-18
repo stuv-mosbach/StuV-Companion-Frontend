@@ -44,7 +44,7 @@ export class LecturesPage implements OnInit {
       .subscribe(data => {
         this.lectures = data;
         this.initLectureMap(this.searchTerm);
-      })
+      });
   }
 
   searching() {

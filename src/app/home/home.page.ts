@@ -13,9 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class HomePage implements OnInit {
   lectureMap: Map<string, Lecture[]> = new Map();
-
-  //cache: Cache<any[]>;
-  //oldCourse: String;
+  
   data: any[];
 
   events = [];
@@ -48,7 +46,7 @@ export class HomePage implements OnInit {
     this.weekend = false;
     if ((new Date()).getDay() == 0 || (new Date()).getDay() == 6) this.weekend = true;
     this.storage.get('course').then(courseID => {
-      let homeObservable = this.homeService.getToday(courseID);
+      const homeObservable = this.homeService.getToday(courseID);
       this.cacheService
         .register('homeCache', homeObservable)
         .mergeMap((cache: Cache<any[]>) => cache.get())
