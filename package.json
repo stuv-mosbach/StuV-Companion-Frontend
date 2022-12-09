@@ -32,7 +32,7 @@
         "@ionic/storage": "2.2.0",
         "ajv": "^6.12.5",
         "cordova-android": "^8.1.0",
-        "cordova-browser": "~5.0.4",
+        "cordova-browser": "~6.0.0",
         "cordova-ios": "4.5.5",
         "cordova-plugin-device": "^2.0.3",
         "cordova-plugin-email-composer": "0.9.2",
